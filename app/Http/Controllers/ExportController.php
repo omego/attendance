@@ -133,10 +133,10 @@ public function downloadExport(Request $request)
         //     return implode(', ', $date);
         //   },
         'Student' => function($queryBuilder) {
-            return $queryBuilder->user->name;
+            return $queryBuilder->user['name'];
           },
         'Block' => function($queryBuilder) {
-            return $queryBuilder->block->block_title;
+            return $queryBuilder->block['block_title'];
           },
         'created at' => 'created_at'
     ];
