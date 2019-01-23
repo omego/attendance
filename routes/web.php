@@ -18,3 +18,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('blocks', 'BlockController');
+Route::post('blocks', 'AttendanceSheetController@store')->name('attendancesheets.store');

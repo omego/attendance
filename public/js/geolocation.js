@@ -20,9 +20,11 @@
             $("#distance").text(distance);
 
             if(distance < .05){
-              $("#message").text("Yes, he is inside .05 KM!!! :) 🎉")
+              $("#message").text("Yes, you're inside .05 KM! :) 🎉");
+              document.getElementById('togglee').style.visibility = 'visible';
             }else if(distance > .05){
-              $("#message").text("No, not inside .05 KM :(")
+              $("#message").text("No, not inside .05 KM :(");
+              document.getElementById('attendBtn').style.visibility = 'hidden';
             }
           });
         }
