@@ -19,7 +19,8 @@
             distance = calculateDistance(startPosLat, startPosLong,position.coords.latitude, position.coords.longitude)
             $("#distance").text(distance);
 
-            if(distance < .05){
+            // it should be .05 later
+            if(distance < 50){ 
               $("#message").text("Yes, you're inside .05 KM! :) 🎉");
               document.getElementById('togglee').style.visibility = 'visible';
             }else if(distance > .05){
