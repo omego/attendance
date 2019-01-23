@@ -6,8 +6,8 @@
       
         if (navigator.geolocation) {
 
-          startPosLat = 21.422802;
-          startPosLong = 39.363094;
+          startPosLat = 21.6097577;
+          startPosLong = 39.132939799999996;
 
           $("#startLat").text(startPosLat);
           $("#startLon").text(startPosLong);

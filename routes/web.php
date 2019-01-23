@@ -20,3 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('blocks', 'BlockController');
 Route::post('blocks', 'AttendanceSheetController@store')->name('attendancesheets.store');
+
+// Reports
+Route::resource('exports','ExportController');
+Route::post('exports/download','ExportController@downloadExport');

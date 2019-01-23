@@ -13,7 +13,7 @@ class CreateAttendanceSheetTable extends Migration
      */
     public function up()
     {
-        Schema::create('attendance_sheet', function (Blueprint $table) {
+        Schema::create('attendance_sheets', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->nullable();
             $table->integer('block_id')->nullable();
@@ -29,6 +29,6 @@ class CreateAttendanceSheetTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attendance_sheet');
+        Schema::dropIfExists('attendance_sheets');
     }
 }
