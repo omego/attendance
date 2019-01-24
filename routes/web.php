@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Route::group(['middleware' => ['role:admin']], function () {
+Route::group(['middleware' => ['role:admin']], function () {
   Route::resource('blocks', 'BlockController');
 
   // Export
@@ -48,7 +48,7 @@ Auth::routes();
   Route::post('roles/addPermission','\App\Http\Controllers\RoleController@addPermission');
   Route::get('roles/removePermission/{permission}/{role_id}','\App\Http\Controllers\RoleController@revokePermission');
 
-// });
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
 

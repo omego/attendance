@@ -17,7 +17,7 @@
    @endif
 
 
-   {{-- <!-- Assign Roles To Users -->
+   <!-- Assign Roles To Users -->
 
    <div class="form-group">
    <h5>{{$user->name}} Roles</h5>
@@ -53,15 +53,13 @@
 
                <div class="form-group">
                @foreach($userRoles as $role)
-
                <a class='btn btn-primary' href='{{url('users/removeRole')}}/{{str_slug($role->name,'-')}}/{{$user->id}}'><i class="fas fa-trash-alt"></i> {{$role->name}}</a>
-
                @endforeach
-             </div> --}}
+             </div>
 
 
              <!-- Assign Permission To Users -->
-{{--
+
              <div class="form-group">
              <h5>{{$user->name}} Permissions</h5>
              </div>
@@ -101,7 +99,7 @@
                          <a class='btn btn-primary' href='{{url('users/removePermission')}}/{{str_slug($permission->name,'-')}}/{{$user->id}}'><i class="fas fa-trash-alt"></i> {{$permission->name}}</a>
 
                          @endforeach
-                       </div> --}}
+                       </div>
 
 
              {{-- <div class="form-group">
