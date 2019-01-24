@@ -44,6 +44,15 @@
                                     <li class="nav-item">
                                             <a class="nav-link" href="{{ route('exports.index') }}">Export</a>
                                             </li>
+                                            <li class="nav-item">
+                                                    <a class="nav-link" href="{{ route('users.index') }}">Users</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                            <a class="nav-link" href="{{ route('roles.index') }}">Roles</a>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                    <a class="nav-link" href="{{ route('permissions.index') }}">Permissions</a>
+                                                                    </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
