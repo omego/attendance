@@ -98,5 +98,7 @@
         </form>
         </div>
       </div>
-      
+        @push('geolocation')
+        <script type="text/javascript" src="{{ secure_url('js/geolocation.js') }}"></script>
+        @endpush
 @endsection

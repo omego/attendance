@@ -11,8 +11,8 @@
 
     <!-- Scripts -->
     <script src="{{ secure_asset('js/app.js') }}" defer></script>
-    <script type="text/javascript" src="{{ secure_url('js/geolocation.js') }}"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
@@ -20,6 +20,9 @@
     <!-- Styles -->
     <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ secure_url('css/geolocation.css') }}" rel="stylesheet">
+
+    @stack('geolocation')
+
 </head>
 <body>
     <div id="app">
@@ -38,6 +41,9 @@
                             <li class="nav-item">
                                     <a class="nav-link" href="{{ route('blocks.index') }}">Blocks</a>
                                     </li>
+                                    <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('exports.index') }}">Export</a>
+                                            </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

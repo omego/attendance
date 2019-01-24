@@ -3,6 +3,7 @@
         var startPosLat;
         var startPosLong;
         var distance;
+        document.getElementById('attendBtn').style.display = "none";
       
         if (navigator.geolocation) {
 
@@ -22,10 +23,11 @@
             // it should be .05 later
             if(distance < 50){ 
               $("#message").text("Yes, you're inside .05 KM! :) 🎉");
-              document.getElementById('togglee').style.visibility = 'visible';
+              // document.getElementById('togglee').style.visibility = 'visible';
+              document.getElementById('attendBtn').style.display = "block";
             }else if(distance > .05){
               $("#message").text("No, not inside .05 KM :(");
-              document.getElementById('attendBtn').style.visibility = 'hidden';
+              // document.getElementById('attendBtn').style.visibility = 'hidden';
             }
           });
         }
