@@ -23,15 +23,14 @@ class AttendanceSheetController extends Controller
         $toDate = Carbon::parse(Carbon::now()->toFormattedDateString())->endOfDay();
         $user = Auth::user();
         $UserAttendance = AttendanceSheet::where('user_id', '=', $user->id)
-        ->where('created_at', '<', Carbon::now()->subMinutes(5)->toDateTimeString())
+        ->where('created_at', '>', Carbon::now()->subMinutes(5)->toDateTimeString())
         ->get();
-        
-        if (count($UserAttendance)) {
-            # code...
+
+        if ($UserAttendance->isEmpty()) {
             $attendancesheet = AttendanceSheet::create($request->all());
             return redirect('home')->with('success', 'Attendance has been taken');
-            
-        }else {
+        }
+else {
             # code...
             return redirect('home')->with('danger', 'Attendance has been taken already!');
         }

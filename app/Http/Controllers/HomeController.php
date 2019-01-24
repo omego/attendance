@@ -31,8 +31,11 @@ class HomeController extends Controller
         $toDate = Carbon::parse(Carbon::now()->toFormattedDateString())->endOfDay();
         $blocks = Block::all();
         $user = Auth::user();
+        // $UserAttendance = AttendanceSheet::where('user_id', '=', $user->id)
+        // ->whereBetween('created_at', [$fromDate, $toDate])
+        // ->get();
         $UserAttendance = AttendanceSheet::where('user_id', '=', $user->id)
-        ->whereBetween('created_at', [$fromDate, $toDate])
+        ->where('created_at', '>', Carbon::now()->subMinutes(5)->toDateTimeString())
         ->get();
         $test = "la la land";
         return view('home',compact('blocks', 'user', 'UserAttendance'));
