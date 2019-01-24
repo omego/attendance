@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BlockRequest;
 use App\Block;
+use Auth;
 
 class BlockController extends Controller
 {

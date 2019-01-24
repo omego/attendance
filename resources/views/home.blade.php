@@ -4,11 +4,16 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-                @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-            @endif
+                @if(session()->get('success'))
+                <div class="alert alert-success">
+                  {{ session()->get('success') }}
+                </div><br />
+              @endif
+              @if(session()->get('danger'))
+                <div class="alert alert-danger">
+                  {{ session()->get('danger') }}
+                </div><br />
+              @endif
             <div class="card">
                 <div class="card-header">Dashboard</div>
 
@@ -39,7 +44,7 @@
                                         </button>
                             </p>
                           </div>
-                          <p>Your attendance:</p>
+                          <p>Your attendance today:</p>
                           <table class="table table-striped">
                                 <thead>
                                     <tr>
@@ -92,7 +97,7 @@
                           </div>
             </div>
             <div class="modal-footer">
-              <button type="submit" class="btn btn-primary">Record Attendance</button>
+              <button type="submit" onclick="this.disabled=true;this.form.submit();" class="btn btn-primary">Record Attendance</button>
             </div>
           </div>
         </form>

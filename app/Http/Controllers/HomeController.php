@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Block;
 use App\AttendanceSheet;
 use Auth;
+use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 
@@ -26,9 +27,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $fromDate = Carbon::parse(Carbon::now()->toFormattedDateString())->startOfDay();
+        $toDate = Carbon::parse(Carbon::now()->toFormattedDateString())->endOfDay();
         $blocks = Block::all();
         $user = Auth::user();
-        $UserAttendance = AttendanceSheet::where('user_id', '=', $user->id)->get();;
+        $UserAttendance = AttendanceSheet::where('user_id', '=', $user->id)
+        ->whereBetween('created_at', [$fromDate, $toDate])
+        ->get();
         $test = "la la land";
         return view('home',compact('blocks', 'user', 'UserAttendance'));
     }

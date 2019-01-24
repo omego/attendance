@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AttendanceSheetRequest;
 use App\AttendanceSheet;
 
+use Carbon\Carbon;
+use Auth;
+
 class AttendanceSheetController extends Controller
 {
     public function index()
@@ -16,10 +19,22 @@ class AttendanceSheetController extends Controller
 
     public function store(AttendanceSheetRequest $request)
     {
-        $attendancesheet = AttendanceSheet::create($request->all());
-
-        return redirect('home')->with('success', 'Attendance has been taken');
-
+        $fromDate = Carbon::parse(Carbon::now()->toFormattedDateString())->startOfDay();
+        $toDate = Carbon::parse(Carbon::now()->toFormattedDateString())->endOfDay();
+        $user = Auth::user();
+        $UserAttendance = AttendanceSheet::where('user_id', '=', $user->id)
+        ->where('created_at', '<', Carbon::now()->subMinutes(5)->toDateTimeString())
+        ->get();
+        
+        if (count($UserAttendance)) {
+            # code...
+            $attendancesheet = AttendanceSheet::create($request->all());
+            return redirect('home')->with('success', 'Attendance has been taken');
+            
+        }else {
+            # code...
+            return redirect('home')->with('danger', 'Attendance has been taken already!');
+        }
     }
 
     public function show($id)
