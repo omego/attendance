@@ -53,6 +53,7 @@
                                                             <li class="nav-item">
                                                                     <a class="nav-link" href="{{ route('permissions.index') }}">Permissions</a>
                                                                     </li>
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -62,6 +63,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
+                            <li class="nav-item">
+                          <a class="btn btn-success btn-lg btn-block waves-effect waves-light" href="{{ url('cas/login')}}">{{ __('Login with KSAU-HS account') }}</a>
+                          </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
