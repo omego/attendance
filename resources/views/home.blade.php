@@ -33,6 +33,10 @@
                               Distance from starting location:<br/>
                               <span id="distance">0</span> km
                             </p>
+                            <p>
+                                Location accuracy:<br/>
+                                <span id="currentAcc">0</span> %
+                            </p>
                              <p>
                               Are we here?<br/>
                               <span id="message">detecting....</span>

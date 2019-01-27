@@ -17,7 +17,6 @@ class AddStudentToUsers extends Migration
             //
             $table->string("badge_number")->after('email');
             $table->string("student_number")->after('badge_number');
-            $table->string("middle_name")->after('name');
         });
     }
 

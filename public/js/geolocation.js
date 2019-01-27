@@ -17,6 +17,7 @@
           navigator.geolocation.watchPosition(function(position) {
             $("#currentLat").text(position.coords.latitude);
             $("#currentLon").text(position.coords.longitude);
+            $("#currentAcc").text(position.coords.accuracy);
 
             distance = calculateDistance(startPosLat, startPosLong,position.coords.latitude, position.coords.longitude)
             $("#distance").text(distance);
