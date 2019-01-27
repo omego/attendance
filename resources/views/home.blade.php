@@ -36,11 +36,12 @@
                              <p>
                               Are we here?<br/>
                               <span id="message">detecting....</span>
-                              <!-- Button trigger modal -->
+                             
                             </p>
                             <p>
+                                 <!-- Button trigger modal -->
                                     <button id="attendBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                            Attend the class
+                                            Attend a Session
                                         </button>
                             </p>
                           </div>

@@ -3,12 +3,13 @@
         var startPosLat;
         var startPosLong;
         var distance;
+
         document.getElementById('attendBtn').style.display = "none";
       
         if (navigator.geolocation) {
 
-          startPosLat = 21.6097577;
-          startPosLong = 39.132939799999996;
+          startPosLat = 21.423092;
+          startPosLong = 39.362932;
 
           $("#startLat").text(startPosLat);
           $("#startLon").text(startPosLong);
@@ -20,14 +21,13 @@
             distance = calculateDistance(startPosLat, startPosLong,position.coords.latitude, position.coords.longitude)
             $("#distance").text(distance);
 
-            // it should be .05 later
+            // it should be .10 later
             if(distance < 50){ 
-              $("#message").text("Yes, you're inside .05 KM! :) 🎉");
-              // document.getElementById('togglee').style.visibility = 'visible';
+              $("#message").text("Yes, you're inside radius (100 Meters) 🎉");
               document.getElementById('attendBtn').style.display = "block";
             }else if(distance > .05){
               $("#message").text("No, not inside .05 KM :(");
-              // document.getElementById('attendBtn').style.visibility = 'hidden';
+              document.getElementById('attendBtn').style.display = "none";
             }
           });
         }
