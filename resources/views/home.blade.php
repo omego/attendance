@@ -39,8 +39,14 @@
                             </p>
                              <p>
                               Are we here?<br/>
-                              <span id="message"><i class="fa fa-spinner fa-spin"></i></span>
+                              <span id="message"><i id="spinner" class="fa fa-spinner fa-spin"></i></span>
                              
+                            </p>
+                            <p>
+                                    <div id="error" class="alert alert-danger">
+                                            
+                                    </div>
+                                    <div id="mapholder"></div>
                             </p>
                             <p>
                                  <!-- Button trigger modal -->
@@ -99,6 +105,7 @@
                               @endforeach
                             </select>
                             <input type="text" class="form-control" name="user_id" value="{{$user->id}}" hidden />
+                            <div id="coords"></div>
                           </div>
             </div>
             <div class="modal-footer">
@@ -108,6 +115,8 @@
         </form>
         </div>
       </div>
+      
+      
         @push('geolocation')
         <script type="text/javascript" src="{{ secure_url('js/geolocation.js') }}"></script>
         @endpush
