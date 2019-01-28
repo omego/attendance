@@ -35,11 +35,11 @@
                             </p>
                             <p>
                                 Location accuracy:<br/>
-                                <span id="currentAcc">0</span> %
+                                <span id="currentAcc">0</span> M
                             </p>
                              <p>
                               Are we here?<br/>
-                              <span id="message">detecting....</span>
+                              <span id="message"><i class="fa fa-spinner fa-spin"></i></span>
                              
                             </p>
                             <p>
