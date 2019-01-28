@@ -42,11 +42,7 @@ Route::get('/cas/logout', function(){
 
 
 Route::group(['middleware' => ['role:admin']], function () {
-  Route::resource('blocks', 'BlockController');
 
-  // Export
-  Route::resource('exports','ExportController');
-  Route::post('exports/download','ExportController@downloadExport');
 
   //Users route
   Route::resource('users','UserController');
@@ -73,6 +69,12 @@ Route::group(['middleware' => ['role:admin']], function () {
   Route::get('roles/removePermission/{permission}/{role_id}','\App\Http\Controllers\RoleController@revokePermission');
 
 });
+
+Route::resource('blocks', 'BlockController')->middleware('permission:blocks');
+
+// Export
+Route::resource('exports','ExportController')->middleware('permission:export');
+Route::post('exports/download','ExportController@downloadExport')->middleware('permission:export');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

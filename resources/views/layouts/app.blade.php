@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Attendance') }}</title>
 
     <!-- Scripts -->
     <script src="{{ secure_asset('js/app.js') }}" defer></script>
@@ -41,12 +41,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                      @can('blocks')
                             <li class="nav-item">
                                     <a class="nav-link" href="{{ route('blocks.index') }}">Blocks</a>
                                     </li>
+                                  @endcan
+                                  @can('export')
                                     <li class="nav-item">
                                             <a class="nav-link" href="{{ route('exports.index') }}">Export</a>
                                             </li>
+                                          @endcan
+                                          @role('admin')
                                             <li class="nav-item">
                                                     <a class="nav-link" href="{{ route('users.index') }}">Users</a>
                                                     </li>
@@ -56,6 +61,7 @@
                                                             <li class="nav-item">
                                                                     <a class="nav-link" href="{{ route('permissions.index') }}">Permissions</a>
                                                                     </li>
+                                                                    @endrole
 
                     </ul>
 
