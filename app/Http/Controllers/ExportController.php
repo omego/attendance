@@ -116,7 +116,7 @@ public function downloadExport(Request $request)
         'Sort By' => $sortBy
     ];
 
-      $queryBuilder = AttendanceSheet::select(['id', 'block_id', 'badge_number', 'student_number', 'created_at', 'user_id']) // Do some querying..
+      $queryBuilder = AttendanceSheet::select(['id', 'block_id', 'created_at', 'user_id']) // Do some querying..
                           ->whereBetween('created_at', [$fromDate, $toDate])
                           ->orderBy($sortBy);
 
