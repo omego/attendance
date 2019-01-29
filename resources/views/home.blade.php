@@ -21,7 +21,7 @@
 
 
                     <div id="tripmeter">
-                            <p>
+                            {{-- <p>
                               Starting Location (lat, lon):<br/>
                               <span id="startLat">???</span>&deg;, <span id="startLon">???</span>&deg;
                             </p>
@@ -36,7 +36,7 @@
                             <p>
                                 Location accuracy:<br/>
                                 <span id="currentAcc">0</span> M
-                            </p>
+                            </p> --}}
                              <p>
                               Are we here?<br/>
                               <span id="message"><i id="spinner" class="fa fa-spinner fa-spin"></i></span>
@@ -46,7 +46,10 @@
                                     <div id="error" class="alert alert-danger">
                                             
                                     </div>
-                                    <div id="mapholder"></div>
+                                    <div id="success" class="alert alert-success">
+                                            
+                                        </div>
+                                    
                             </p>
                             <p>
                                  <!-- Button trigger modal -->
@@ -54,13 +57,15 @@
                                             Attend a Session
                                         </button>
                             </p>
+                            <p>
+                                    <div id="mapholder"></div>
+                            </p>
                           </div>
                           <p>Your attendance today:</p>
                           <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                      <td>ID</td>
-                                      <td>user id</td>
+                                      <td>Number</td>
                                       <td>block id</td>
                                       <td>when?</td>
                                     </tr>
@@ -68,10 +73,9 @@
                                 <tbody>
                                     @foreach($UserAttendance as $Attendance)
                                     <tr>
-                                        <td>{{$Attendance['id']}}</td>
-                                        <td>{{$Attendance['user_id']}}</td>
-                                        <td>{{$Attendance['block_id']}}</td>
-                                        <td>{{$Attendance['created_at']}}</td>
+                                        <td>{{$loop->index+1}}</td>
+                                        <td><b>{{$Attendance->block->block_title}}</b></td>
+                                        <td>{{$Attendance['created_at']}} ({{$Attendance['created_at']->diffForHumans()}})</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
