@@ -116,7 +116,7 @@ public function downloadExport(Request $request)
         'Sort By' => $sortBy
     ];
 
-      $queryBuilder = AttendanceSheet::select(['id', 'block_id', 'created_at', 'user_id']) // Do some querying..
+      $queryBuilder = AttendanceSheet::select(['id', 'block_id', 'badge_number', 'student_number', 'created_at', 'user_id']) // Do some querying..
                           ->whereBetween('created_at', [$fromDate, $toDate])
                           ->orderBy($sortBy);
 
@@ -137,6 +137,12 @@ public function downloadExport(Request $request)
           },
         'Block' => function($queryBuilder) {
             return $queryBuilder->block['block_title'];
+          },
+        'Student #' => function($queryBuilder) {
+            return $queryBuilder->user['badge_number'];
+          },
+        'Badge #' => function($queryBuilder) {
+            return $queryBuilder->user['student_number'];
           },
         'created at' => 'created_at'
     ];
