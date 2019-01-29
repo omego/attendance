@@ -121,6 +121,8 @@ class UserController extends Controller
 
        $user->email = $request->email;
        $user->name = $request->name;
+       $user->badge_number = $request->badge_number;
+       $user->student_number = $request->student_number;
        if(!empty($request->input('password')))
      {
          $user->password = Hash::make($request->password);

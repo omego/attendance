@@ -15,8 +15,8 @@ class AddStudentToUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->string("badge_number")->after('email');
-            $table->string("student_number")->after('badge_number');
+            $table->string("badge_number")->after('email')->nullable();
+            $table->string("student_number")->after('badge_number')->nullable();
         });
     }
 

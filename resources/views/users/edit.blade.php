@@ -145,6 +145,16 @@
           </div>
 
           <div class="form-group">
+            <label for="badge">Badge</label>
+            <input type="text" class="form-control" name="badge_number" value="{{$user->badge_number}}"/>
+          </div>
+
+          <div class="form-group">
+            <label for="student_number">Student Number</label>
+            <input type="text" class="form-control" name="student_number" value="{{$user->student_number}}"/>
+          </div>
+
+          <div class="form-group">
             <label for="name">Password</label>
             <input type="password" class="form-control" name="password" />
           </div>
