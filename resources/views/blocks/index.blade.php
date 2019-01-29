@@ -1,17 +1,17 @@
 @extends('layouts.app')
-@section('title', 'Locations')
+@section('title', 'Blocks')
 @section('content')
 
 <div class = 'container'>
   <div class="row">
 <div class="col">
-{{-- <a class="btn btn-primary" href="{{ route('blocks.create')}}" role="button">New +</a> --}}
+<a class="btn btn-primary" href="{{ route('blocks.create')}}" role="button">New +</a>
 </div>
 </div>
 <button type="button" class="btn btn-link"></button>
 <div class="card uper">
   <div class="card-header">
-   All Location
+   Blocks
   </div>
   @if(session()->get('success'))
     <div class="alert alert-success">
@@ -31,9 +31,9 @@
         <tr>
             <td>{{$block->id}}</td>
             <td>{{$block->block_title}}</td>
-            {{-- <td><a href="{{ route('location.edit',$location->id)}}" class="btn btn-primary">Edit</a></td> --}}
+            <td><a href="{{ route('blocks.edit',$block->id)}}" class="btn btn-primary">Edit</a></td>
             <td>
-              
+
             </td>
         </tr>
         @endforeach
