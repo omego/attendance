@@ -8,6 +8,11 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
+                    <div class="form-group">
+                            <a class="btn btn-success btn-lg btn-block" href="{{ url('cas/login')}}">{{ __('Login with KSAU-HS account') }}</a>
+                    </div>
+                    <div class="form-group">
+<hr>                    </div>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
