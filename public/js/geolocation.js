@@ -7,7 +7,7 @@
         document.getElementById('attendBtn').style.display = "none";
         document.getElementById('success').style.display = "none";
         document.getElementById('error').style.display = "none";
-      
+
         if (navigator.geolocation) {
 
           startPosLat = 21.423092;
@@ -15,7 +15,7 @@
 
           // $("#startLat").text(startPosLat);
           // $("#startLon").text(startPosLong);
-      
+
           navigator.geolocation.watchPosition(function(position) {
             // $("#currentLat").text(position.coords.latitude);
             // $("#currentLon").text(position.coords.longitude);
@@ -25,7 +25,7 @@
             // $("#distance").text(distance);
 
             // it should be .10 later
-            if(distance < 50){ 
+            if(distance < .10){ 
 
               var latlon = position.coords.latitude + "," + position.coords.longitude;
               var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=16&scale=2&size=600x400&maptype=roadmap&key=AIzaSyBGCql0HlN4C_D7B2BcIIhtuFvjrdfvoew&format=png&visual_refresh=true&markers=size:small%7Ccolor:0x171faa%7Clabel:1%7C"+latlon;
@@ -45,7 +45,7 @@
               document.getElementById('success').style.display = "none";
               document.getElementById('mapholder').style.display = "none";
               document.getElementById("error").innerHTML = "You're not inside building :(";
-              
+
             }
           },handleError);
 
@@ -73,7 +73,7 @@
           alert("Your browser doesn't support Geolocation");
         }
       };
-      
+
       // Reused code - copyright Moveable Type Scripts - retrieved May 4, 2010.
       // http://www.movable-type.co.uk/scripts/latlong.html
       // Under Creative Commons License http://creativecommons.org/licenses/by/3.0/
