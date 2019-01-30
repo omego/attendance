@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AttendanceSheetRequest;
 use App\AttendanceSheet;
-
+use App\Block;
 use Carbon\Carbon;
 use Auth;
 
@@ -12,9 +12,10 @@ class AttendanceSheetController extends Controller
 {
     public function index()
     {
-        $attendancesheets = AttendanceSheet::latest()->get();
+        $attendancesheets = AttendanceSheet::latest()->simplePaginate(15);
 
-        return response()->json($attendancesheets);
+        return view('attendance.index', compact('attendancesheets'));
+        // return response()->json($attendancesheets);
     }
 
     public function store(AttendanceSheetRequest $request)

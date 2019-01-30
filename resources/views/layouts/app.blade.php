@@ -40,6 +40,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                      @can('attendance sheet')
+                            <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('attendance') }}">Attendance Sheet</a>
+                                    </li>
+                                  @endcan
                       @can('blocks')
                             <li class="nav-item">
                                     <a class="nav-link" href="{{ route('blocks.index') }}">Blocks</a>
