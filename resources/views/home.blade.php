@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Attendance Sheet')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -15,7 +15,7 @@
                 </div><br />
               @endif
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">Attendance Sheet</div>
 
                 <div class="card-body">
 
@@ -39,17 +39,17 @@
                             </p> --}}
                              <p>
                               Are we here?<br/>
-                              <span id="message"><i id="spinner" class="fa fa-spinner fa-spin"></i></span>
-                             
+                              <span id="message"><i id="spinner" class="fa fa-spinner fa-pulse"></i></span>
+
                             </p>
                             <p>
                                     <div id="error" class="alert alert-danger">
-                                            
+
                                     </div>
                                     <div id="success" class="alert alert-success">
-                                            
+
                                         </div>
-                                    
+
                             </p>
                             <p>
                                  <!-- Button trigger modal -->
@@ -87,7 +87,7 @@
 </div>
 
 
-      
+
       <!-- Modal -->
       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -119,8 +119,8 @@
         </form>
         </div>
       </div>
-      
-      
+
+
         @push('geolocation')
         <script type="text/javascript" src="{{ secure_url('js/geolocation.js') }}"></script>
         @endpush
