@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Attendance Sheet')
+@section('title', 'Attend')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -15,7 +15,7 @@
                 </div><br />
               @endif
             <div class="card">
-                <div class="card-header">Attendance Sheet</div>
+                <div class="card-header">{{$user->name}} - Number: {{$user->student_number}} - Badge: {{$user->badge_number}}</div>
 
                 <div class="card-body">
 
