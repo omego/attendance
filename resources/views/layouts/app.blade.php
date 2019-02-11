@@ -55,6 +55,11 @@
                                             <a class="nav-link" href="{{ route('exports.index') }}">Export</a>
                                             </li>
                                           @endcan
+                                          @can('problems')
+                                            <li class="nav-item">
+                                                    <a class="nav-link" href="{{ route('problem') }}">Problems</a>
+                                                    </li>
+                                                  @endcan
                                           @role('admin')
                                             <li class="nav-item">
                                                     <a class="nav-link" href="{{ route('users.index') }}">Users</a>

@@ -40,7 +40,7 @@ Route::get('/cas/logout', function(){
       cas()->logout();
 });
 
-
+Route::group(['middleware'=> 'auth'],function(){
 Route::group(['middleware' => ['role:admin']], function () {
 
 
@@ -72,6 +72,11 @@ Route::group(['middleware' => ['role:admin']], function () {
 });
 Route::get('/attendance', 'AttendanceSheetController@index')->name('attendance')->middleware('permission:attendance sheet');
 
+Route::get('/problems', 'ProblemController@index')->name('problem')->middleware('permission:problems');
+Route::get('problems/create', 'ProblemController@create')->name('problem.create');
+Route::post('problem', 'ProblemController@store')->name('problem.store');
+Route::delete('problems/{problem}', 'ProblemController@destroy')->name('problem.destroy');
+
 Route::resource('blocks', 'BlockController')->middleware('permission:blocks');
 
 // Export
@@ -81,3 +86,4 @@ Route::post('exports/download','ExportController@downloadExport')->middleware('p
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('blocks', 'AttendanceSheetController@store')->name('attendancesheets.store');
+});
