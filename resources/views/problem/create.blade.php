@@ -24,11 +24,11 @@
               <select class="custom-select custom-select-lg mb-3" name="problem_title" required>
                 <option value="" selected>*What is the problem?</option>
                 <option value="Location Not Working">Location Not Working</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option value="Location Incorrect">Location Incorrect</option>
+                <option value="The Attendance button is not visible">The Attendance Button is Not Visible</option>
+                <option value="The Lecturer is Absent">The Lecturer is Absent</option>
+                <option value="Some Students Escaped The Session After They Were Here!">Some Students Escaped The Session After They Were Here!</option>
+                <option value="Other">Other (Write Below)</option>
               </select>
           </div>
 
