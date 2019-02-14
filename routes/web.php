@@ -73,7 +73,7 @@ Route::group(['middleware' => ['role:admin']], function () {
 Route::get('/attendance', 'AttendanceSheetController@index')->name('attendance')->middleware('permission:attendance sheet');
 
 Route::get('/problems', 'ProblemController@index')->name('problem')->middleware('permission:problems');
-Route::get('problems/create', 'ProblemController@create')->name('problem.create');
+//Route::get('problems/create', 'ProblemController@create')->name('problem.create');
 Route::post('problem', 'ProblemController@store')->name('problem.store');
 Route::delete('problems/{problem}', 'ProblemController@destroy')->name('problem.destroy');
 

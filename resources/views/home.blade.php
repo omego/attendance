@@ -15,7 +15,52 @@
                 </div><br />
               @endif
             <div class="card">
-                <div class="card-header">{{$user->name}} - Number: {{$user->student_number}} - Badge: {{$user->badge_number}}</div>
+                <div class="card-header">{{$user->name}} - Number: {{$user->student_number}} - Badge: {{$user->badge_number}}
+                  <!-- Button trigger modal -->
+                <button type="button" class="btn btn-outline-danger btn-sm float-right" data-toggle="modal" data-target="#problem">
+                  Problem?
+                </button>
+                </div>
+
+                      <!-- Modal -->
+      <div class="modal fade" id="problem" tabindex="-1" role="dialog" aria-labelledby="problemTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="problem">Submit Your Problem</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                  <form method="post" action="{{ route('problem.store') }}">
+                      <div class="form-group">
+                          @csrf
+
+                          <select class="custom-select custom-select-lg mb-3" name="problem_title" required>
+                            <option value="" selected>*What is the problem?</option>
+                            <option value="🗺 Location Not Working or Incorrect">🗺 Location Not Working</option>
+                            <option value="❌ My information Incorrect">❌ My information Incorrect</option>
+                            <option value="🔍 The Attendance button is not visible">🔍 Attendance Button Not Visible</option>
+                            <option value="👨🏻‍⚕️ The Lecturer is Absent">👨🏻‍⚕️ Absent Lecturer</option>
+                            <option value="🚷 Students Escaped">🚷 Students Escaped</option>
+                            <option value="Other">Other (Write Below)</option>
+                          </select>
+                      </div>
+
+                      <div class="form-group">
+                      <label for="ProblemDescription">Problem Description (optional)</label>
+                      <textarea class="form-control" name="problem_content" id="ProblemDescription" rows="3"></textarea>
+                    </div>
+
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary btn-lg btn-block">Send 🚀</button>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
                 <div class="card-body">
 
