@@ -116,6 +116,7 @@
         <main class="py-4">
             @yield('content')
         </main>
+        <div class="text-center"><small>@version</small></div>
     </div>
 </body>
 </html>
