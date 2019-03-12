@@ -17,9 +17,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 // Route::resource('blocks', 'BlockController');
-Route::resource('attendancesheets', 'AttendanceSheetController');
+// Route::resource('attendancesheets', 'AttendanceSheetController');
+// Route::apiResource('blocks', 'API\BlockController');
+Route::get('blocks', 'API\BlockController@index');
+
+
+Route::post('blocks', 'API\BlockController@store');
+Route::post('attendance', 'API\AttendanceSheetController@store');
+// Route::apiResource('attendance', 'API\AttendanceSheetController');
 
 Route::middleware('auth:api')->group( function () {
-    Route::resource('blocks', 'API\BlockController');
-    Route::resource('attendance', 'API\AttendanceSheetController');
+    // Route::resource('attendance', 'API\AttendanceSheetController');
 });
+
+

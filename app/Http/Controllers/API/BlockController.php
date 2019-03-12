@@ -19,12 +19,24 @@ class BlockController extends BaseController
      */
     public function index()
     {
-        $products = Block::all();
+        $blocks = Block::all();
+        // return response()->json($blocks);
 
-
-        return $this->sendResponse($products->toArray(), 'Products retrieved successfully.');
+        return $this->sendResponse($blocks->toArray(), 'Products retrieved successfully.');
     }
 
+    public function create(Request $request)
+    {
+        //
+        $block = new block;
+
+        $block->block_title = $request->block_title;
+
+
+        $block->save();
+
+        return $this->sendResponse($block->toArray(), 'Block created successfully.');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -37,21 +49,21 @@ class BlockController extends BaseController
         $input = $request->all();
 
 
-        $validator = Validator::make($input, [
-            'name' => 'required',
-            'detail' => 'required'
-        ]);
+        // $validator = Validator::make($input, [
+        //     'name' => 'required',
+        //     'detail' => 'required'
+        // ]);
 
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
-        }
+        // if($validator->fails()){
+        //     return $this->sendError('Validation Error.', $validator->errors());       
+        // }
 
 
-        $product = Block::create($input);
+        $block = Block::create($input);
 
 
-        return $this->sendResponse($product->toArray(), 'Product created successfully.');
+        return $this->sendResponse($block->toArray(), 'block created successfully.');
     }
 
 

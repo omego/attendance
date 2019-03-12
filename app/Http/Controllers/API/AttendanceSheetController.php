@@ -23,9 +23,21 @@ class AttendanceSheetController extends BaseController
         $attendancesheets = AttendanceSheet::all();
 
 
-        return $this->sendResponse($attendancesheets->toArray(), 'Products retrieved successfully.');
+        return $this->sendResponse($attendancesheets->toArray(), 'Prcts retrieved successfully.');
     }
 
+    public function create(Request $request)
+    {
+        //
+        $attendancesheets = new AttendanceSheet;
+
+        $attendancesheets->user_id = $request->user_id;
+
+
+        $attendancesheets->save();
+
+        return $this->sendResponse($attendancesheets->toArray(), 'Block created successfully.');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -38,21 +50,21 @@ class AttendanceSheetController extends BaseController
         $input = $request->all();
 
 
-        $validator = Validator::make($input, [
-            'name' => 'required',
-            'detail' => 'required'
-        ]);
+        // $validator = Validator::make($input, [
+        //     'name' => 'required',
+        //     'detail' => 'required'
+        // ]);
 
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
-        }
+        // if($validator->fails()){
+        //     return $this->sendError('Validation Error.', $validator->errors());       
+        // }
 
 
-        $product = Block::create($input);
+        $attendanceSheet = AttendanceSheet::create($input);
 
 
-        return $this->sendResponse($product->toArray(), 'Product created successfully.');
+        return $this->sendResponse($attendanceSheet->toArray(), 'attendance created successfully.');
     }
 
 
