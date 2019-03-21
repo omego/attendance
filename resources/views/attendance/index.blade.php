@@ -22,6 +22,7 @@
         <tr>
           <td>Name</td>
           <td>Block</td>
+          <td>Class</td>
           <td>Number</td>
           <td>Badge</td>
           <td>Date/Time</td>
@@ -37,6 +38,7 @@
     <tr>
       <td>{{$attendancesheet->user->name}}</td>
       <td><b>{{$attendancesheet->block->block_title}}</b></td>
+      <td><b>{{$attendancesheet->beacon}}</b></td>
       <td>{{$attendancesheet->user->student_number}}</td>
       <td>{{$attendancesheet->user->badge_number}}</td>
       <td>{{$attendancesheet['created_at']}} <b>({{$attendancesheet['created_at']->diffForHumans()}})</b></td>

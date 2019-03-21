@@ -9,6 +9,8 @@ use App\Http\Controllers\API\BaseController as BaseController;
 use App\AttendanceSheet;
 use App\Block;
 use Validator;
+use App\User;
+use Carbon\Carbon;
 
 
 class AttendanceSheetController extends BaseController
@@ -22,8 +24,9 @@ class AttendanceSheetController extends BaseController
     {
         $attendancesheets = AttendanceSheet::all();
 
+        return response()->json($attendancesheets);
 
-        return $this->sendResponse($attendancesheets->toArray(), 'Prcts retrieved successfully.');
+        // return $this->sendResponse($attendancesheets->toArray(), 'Prcts retrieved successfully.');
     }
 
     public function create(Request $request)
@@ -47,7 +50,7 @@ class AttendanceSheetController extends BaseController
      */
     public function store(Request $request)
     {
-        $input = $request->all();
+        // $input = $request->all();
 
 
         // $validator = Validator::make($input, [
@@ -59,12 +62,19 @@ class AttendanceSheetController extends BaseController
         // if($validator->fails()){
         //     return $this->sendError('Validation Error.', $validator->errors());       
         // }
+        $attendancesheets = new AttendanceSheet;
+        
+        $userEmail = User::select('id')->where('email', $request->user_email)->first();
+        $attendancesheets->user_id = $userEmail->id;
+        $attendancesheets->block_id = $request->block_id;
+        $attendancesheets->coords = $request->coords;
+        $attendancesheets->beacon = $request->beacon;
 
+        // $attendanceSheet = AttendanceSheet::create($input);
+        
+        $attendancesheets->save();
 
-        $attendanceSheet = AttendanceSheet::create($input);
-
-
-        return $this->sendResponse($attendanceSheet->toArray(), 'attendance created successfully.');
+        return $this->sendResponse($attendancesheets->toArray(), 'attendance created successfully.');
     }
 
 
@@ -132,5 +142,27 @@ class AttendanceSheetController extends BaseController
 
 
         return $this->sendResponse($product->toArray(), 'Product deleted successfully.');
+    }
+
+    public function StudentLastAttendance($email_id)
+    {
+
+        $user = User::select('id')->where('email', $email_id)->first();
+
+        $fromDate = Carbon::parse(Carbon::now()->toFormattedDateString())->startOfDay();
+        $toDate = Carbon::parse(Carbon::now()->toFormattedDateString())->endOfDay();
+        $UserLastAttendance = AttendanceSheet::where('user_id', '=', $user->id)
+        ->whereBetween('created_at', [$fromDate, $toDate])
+        ->get();
+
+        // $attendancesheets = AttendanceSheet::find($id);
+
+
+        // if (is_null($block)) {
+        //     return $this->sendError('Product not found.');
+        // }
+
+        // return response()->json($UserLastAttendance);
+        return $this->sendResponse($UserLastAttendance->toArray(), 'Product retrieved successfully.');
     }
 }

@@ -20,10 +20,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // Route::resource('attendancesheets', 'AttendanceSheetController');
 // Route::apiResource('blocks', 'API\BlockController');
 Route::get('blocks', 'API\BlockController@index');
-
-
 Route::post('blocks', 'API\BlockController@store');
+
+Route::get('attendance', 'API\AttendanceSheetController@index');
 Route::post('attendance', 'API\AttendanceSheetController@store');
+
+Route::get('attendance/latest/{email_id}','API\AttendanceSheetController@StudentLastAttendance');
+
 // Route::apiResource('attendance', 'API\AttendanceSheetController');
 
 Route::middleware('auth:api')->group( function () {
