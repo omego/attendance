@@ -78,6 +78,7 @@ Route::post('problem', 'ProblemController@store')->name('problem.store');
 Route::delete('problems/{problem}', 'ProblemController@destroy')->name('problem.destroy');
 
 Route::resource('blocks', 'BlockController')->middleware('permission:blocks');
+//Route::post('blocks', 'BlockController@store')->name('blocks.store')->middleware('permission:blocks');
 
 // Export
 Route::resource('exports','ExportController')->middleware('permission:export');
@@ -85,5 +86,5 @@ Route::post('exports/download','ExportController@downloadExport')->middleware('p
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('blocks', 'AttendanceSheetController@store')->name('attendancesheets.store');
+Route::post('AttendanceSheets', 'AttendanceSheetController@store')->name('attendancesheets.store');
 });
