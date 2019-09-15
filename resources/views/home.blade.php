@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('title', 'Attend')
 @section('content')
+<script>
+  var GOOGLE_API = '{!! env("GOOGLE_MAPS_STATIC_API") !!}';
+  </script>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -43,7 +46,7 @@
                             <option value="❌ My information Incorrect">❌ My information Incorrect</option>
                             <option value="🔍 The Attendance button is not visible">🔍 Attendance Button Not Visible</option>
                             <option value="👨🏻‍⚕️ The Lecturer is Absent">👨🏻‍⚕️ Absent Lecturer</option>
-                            <option value="🚷 Students Escaped">🚷 Students Escaped</option>
+                            {{-- <option value="🚷 Students Escaped">🚷 Students Escaped</option> --}}
                             <option value="Other">Other (Write Below)</option>
                           </select>
                       </div>
