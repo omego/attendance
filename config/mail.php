@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-          'address' => env('MAIL_FROM_ADDRESS', 'attendance@yamanisa.com'),
-          'name' => env('MAIL_FROM_NAME', 'Attendance App'),
+          'address' => env('MAIL_FROM_ADDRESS'),
+          'name' => env('MAIL_FROM_NAME'),
       ],
 
       'reply_to' => ['address' => 'comj-applications@ksau-hs.edu.sa', 'name' => 'COMJ Applications Team'],
