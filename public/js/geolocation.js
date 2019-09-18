@@ -38,7 +38,7 @@
               // $("#message").text("Yes, you're inside radius (100 Meters) 🎉");
               document.getElementById('spinner').style.display = "none";
               document.getElementById('success').style.display = "block";
-              document.getElementById("success").innerHTML = "Yes, you're inside the building 🎉";
+              document.getElementById("success").innerHTML = "You can record your attendance";
               document.getElementById('attendBtn').style.display = "block";
               document.getElementById("mapholder").innerHTML = "<img style='width: 100%;' src='"+img_url+"'>";
               document.getElementById("coords").innerHTML = "<input id='coords' type='text' name='coords' value='"+latlon+"' hidden />";
@@ -49,7 +49,7 @@
               document.getElementById('error').style.display = "block";
               document.getElementById('success').style.display = "none";
               document.getElementById("mapholder").innerHTML = "<img style='width: 100%;' src='"+img_url+"'>";
-              document.getElementById("error").innerHTML = "You're not inside building :(";
+              document.getElementById("error").innerHTML = "You are outside the attendance enabled location";
 
             }
           },handleError);
@@ -60,7 +60,7 @@
               case error.PERMISSION_DENIED:
                   document.getElementById('spinner').style.display = "none";
                   document.getElementById('error').style.display = "block";
-                  document.getElementById("error").innerHTML = "You've denied the request for Geolocation.";
+                  document.getElementById("error").innerHTML = "You've denied the request for Geolocation (location services), please follow this instructions to allow the website to use your location.\notherwise you will not be able to register your attendance.";
                   break;
               case error.POSITION_UNAVAILABLE:
                   console.log("Location information is unavailable.");
