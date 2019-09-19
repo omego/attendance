@@ -122,7 +122,9 @@
                                     @foreach($UserAttendance as $Attendance)
                                     <tr>
                                         <td>{{$loop->index+1}}</td>
+                                        @if (isset($Attendance->block->block_title))
                                         <td><b>{{$Attendance->block->block_title}}</b></td>
+                                        @endif
                                         <td>{{$Attendance['created_at']}} ({{$Attendance['created_at']->diffForHumans()}})</td>
                                     </tr>
                                     @endforeach
