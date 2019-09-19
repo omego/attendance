@@ -31,10 +31,10 @@ $('select[name="batchList"]').on('change', function(){
 
         for(var i=0; i<data.length; i++) {
           if (data[i].assigned==1){
-            result += '<tr><td><input type="checkbox" name="assignStuToBlock[]" value="'+data[i].student_number+'" class="stuList" checked></td><td>'+data[i].name+'</td><td>'+data[i].email+'</td><td>'+data[i].badge_number+'</td><td>'+data[i].student_number+'</td><td>'+data[i].batch+'</td></tr>';
+            result += '<tr><td><input type="checkbox" name="assignStuToBlock[]" value="'+data[i].id+'" class="stuList" checked></td><td>'+data[i].name+'</td><td>'+data[i].email+'</td><td>'+data[i].badge_number+'</td><td>'+data[i].student_number+'</td><td>'+data[i].batch+'</td></tr>';
 
           }else{
-            result += '<tr><td><input type="checkbox" name="assignStuToBlock[]" value="'+data[i].student_number+'" class="stuList"></td><td>'+data[i].name+'</td><td>'+data[i].email+'</td><td>'+data[i].badge_number+'</td><td>'+data[i].student_number+'</td><td>'+data[i].batch+'</td></tr>';
+            result += '<tr><td><input type="checkbox" name="assignStuToBlock[]" value="'+data[i].id+'" class="stuList"></td><td>'+data[i].name+'</td><td>'+data[i].email+'</td><td>'+data[i].badge_number+'</td><td>'+data[i].student_number+'</td><td>'+data[i].batch+'</td></tr>';
           }
         }
 

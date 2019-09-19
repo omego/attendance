@@ -13,9 +13,9 @@ class CreateBlockStudents extends Migration
      */
     public function up()
     {
-        Schema::create('block_students', function (Blueprint $table) {
+        Schema::create('block_user', function (Blueprint $table) {
             $table->increments('id');
-            $table->string("student_number");
+            $table->string("user_id");
             $table->integer('block_id');
             $table->timestamps();
         });

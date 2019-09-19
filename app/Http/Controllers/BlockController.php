@@ -42,10 +42,8 @@ class BlockController extends Controller
 
     $block->block_title = $request->block_title;
 
-
     $block->save();
     return redirect('/blocks')->with('success', 'Block has been added');
-
 
     // return response()->json($block, 201);
   }
@@ -67,7 +65,7 @@ class BlockController extends Controller
     $students = $request->assignStuToBlock; // array of Students to be assigned to the block
 
     foreach ($students as $student) {
-      $data = array('student_number' =>$student , 'block_id' => $id, 'created_at' => \Carbon\Carbon::now());
+      $data = array('user_id' =>$student , 'block_id' => $id, 'created_at' => \Carbon\Carbon::now());
       blockStudents::insert($data);
     }
 
@@ -103,10 +101,10 @@ class BlockController extends Controller
     // if the block has students already assigned to it
     if ($assigned_stu){
 
-      $assigned_list = DB::table("block_students")
+      $assigned_list = DB::table("block_user")
       ->where("block_id",$bid)
-      ->join('users', 'users.student_number', '=', 'block_students.student_number')
-      ->select('users.student_number')->get();
+      ->join('users', 'users.id', '=', 'block_user.user_id')
+      ->select('users.id')->get();
 
       foreach($stuList as $k => $obj) {
         $obj->{'assigned'} = 0;
@@ -117,7 +115,7 @@ class BlockController extends Controller
       // compare assigned students to all students
       foreach ($stuList as $key1=>$value1) {
         foreach ($assigned_list as $key2=>$value2) {
-          if ($value1['student_number']== $value2['student_number']) {
+          if ($value1['id']== $value2['id']) {
             $value1['assigned']=1;
           }
         }
