@@ -6,7 +6,7 @@ use App\Http\Requests\BlockRequest;
 use App\Block;
 use App\User;
 use DB;
-use App\blockStudents;
+use App\UserBlock;
 use Auth;
 
 class BlockController extends Controller
@@ -64,9 +64,12 @@ class BlockController extends Controller
 
     $students = $request->assignStuToBlock; // array of Students to be assigned to the block
 
+    // delete old assignment
+    //UserBlock::where('block_id', $id)->delete();
+
     foreach ($students as $student) {
       $data = array('user_id' =>$student , 'block_id' => $id, 'created_at' => \Carbon\Carbon::now());
-      blockStudents::insert($data);
+      UserBlock::insert($data);
     }
 
     return redirect('/blocks')->with('success', 'Block has been updated');
@@ -96,7 +99,7 @@ class BlockController extends Controller
     // All students in selected batch
     $stuList = User::where('batch','=',$id)->get();
 
-    $assigned_stu = blockStudents::where('block_id','=',$bid)->get();
+    $assigned_stu = UserBlock::where('block_id','=',$bid)->get();
 
     // if the block has students already assigned to it
     if ($assigned_stu){
