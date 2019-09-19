@@ -68,6 +68,8 @@ Route::group(['middleware' => ['role:admin']], function () {
   Route::post('roles/addPermission','\App\Http\Controllers\RoleController@addPermission');
   Route::get('roles/removePermission/{permission}/{role_id}','\App\Http\Controllers\RoleController@revokePermission');
 
+  // show all students of selected batch
+  Route::get('dynamic/batch/{id}/block/{bid}', '\App\Http\Controllers\BlockController@dynamic_dependent');
 
 });
 Route::get('/attendance', 'AttendanceSheetController@index')->name('attendance')->middleware('permission:attendance sheet');
