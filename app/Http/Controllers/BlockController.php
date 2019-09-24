@@ -64,16 +64,20 @@ class BlockController extends Controller
 
     $students = $request->assignStuToBlock; // array of Students to be assigned to the block
 
-    // delete old assignment
-    //UserBlock::where('block_id', $id)->delete();
+    if ($students){ // if at least one students selected (checked)
+      // delete all old assignment
+      UserBlock::where('block_id', $id)->delete();
+      $result = false;
+      foreach ($students as $student) {
+        $data = array('user_id' =>$student , 'block_id' => $id, 'created_at' => \Carbon\Carbon::now());
+        $result = UserBlock::insert($data);
+      }
 
-    foreach ($students as $student) {
-      $data = array('user_id' =>$student , 'block_id' => $id, 'created_at' => \Carbon\Carbon::now());
-      UserBlock::insert($data);
+      if ($result)
+      {
+        return redirect('/blocks')->with('success', 'Block has been updated');
+      }
     }
-
-    return redirect('/blocks')->with('success', 'Block has been updated');
-
 
   }
 
