@@ -100,10 +100,12 @@
 
                             </p>
                             <p>
-                                 <!-- Button trigger modal -->
+                              <!-- Prevent empty block attendance -->
+                              @if (count($blocks))
                                     <button id="attendBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                             Attend a Session
                                         </button>
+                                        @endif
                             </p>
                             <p>
                                     <div id="mapholder"></div>
