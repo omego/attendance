@@ -100,12 +100,9 @@
 
                             </p>
                             <p>
-                              <!-- Prevent empty block attendance -->
-                              @if (count($blocks))
                                     <button id="attendBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                             Attend a Session
                                         </button>
-                                        @endif
                             </p>
                             <p>
                                     <div id="mapholder"></div>
@@ -155,7 +152,8 @@
             <div class="modal-body">
                     <div class="form-group">
                             <label for="exampleFormControlSelect1">Block</label>
-                            <select class="form-control" name="block_id" id="exampleFormControlSelect1">
+                            <select class="form-control" name="block_id" required>
+                              <option selected value> -- Please Select a Block -- </option>
                               @foreach ($blocks as $block)
                                 <option value="{{$block->id}}">{{$block->block_title}}</option>
                               @endforeach
@@ -165,7 +163,7 @@
                           </div>
             </div>
             <div class="modal-footer">
-              <button type="submit" onclick="this.disabled=true;this.form.submit();" class="btn btn-primary">Record Attendance</button>
+              <button type="submit" onclick="newModalForm();this.disabled=true;this.form.submit();" class="btn btn-primary">Record Attendance</button>
             </div>
           </div>
         </form>

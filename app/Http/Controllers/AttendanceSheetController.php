@@ -20,6 +20,10 @@ class AttendanceSheetController extends Controller
 
     public function store(AttendanceSheetRequest $request)
     {
+      $request->validate([
+        'block_id'=>'required',
+      ]);
+
         $fromDate = Carbon::parse(Carbon::now()->toFormattedDateString())->startOfDay();
         $toDate = Carbon::parse(Carbon::now()->toFormattedDateString())->endOfDay();
         $user = Auth::user();
