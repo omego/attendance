@@ -139,10 +139,10 @@ public function downloadExport(Request $request)
             return $queryBuilder->block['block_title'];
           },
         'Student #' => function($queryBuilder) {
-            return $queryBuilder->user['badge_number'];
+            return $queryBuilder->user['student_number'];
           },
         'Badge #' => function($queryBuilder) {
-            return $queryBuilder->user['student_number'];
+            return $queryBuilder->user['badge_number'];
           },
         'created at' => 'created_at'
     ];
