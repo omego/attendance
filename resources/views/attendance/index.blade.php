@@ -27,7 +27,7 @@
           <td>Badge</td>
           <td>Date/Time</td>
           <td>GPS</td>
-          
+
           {{-- <td>Groups</td> --}}
 
         </tr>
@@ -37,7 +37,13 @@
   @foreach($attendancesheets as $attendancesheet)
     <tr>
       <td>{{$attendancesheet->user->name}}</td>
-      <td><b>{{$attendancesheet->block->block_title}}</b></td>
+
+      <td>
+        @if (isset($attendancesheet->block->block_title))
+        <b>{{$attendancesheet->block->block_title}}</b>
+        @endif
+      </td>
+
       <td><b>{{$attendancesheet->beacon}}</b></td>
       <td>{{$attendancesheet->user->student_number}}</td>
       <td>{{$attendancesheet->user->badge_number}}</td>
