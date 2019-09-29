@@ -13,7 +13,15 @@ class BlockController extends Controller
 {
   public function index()
   {
-    $blocks = Block::latest()->get();
+    //$blocks = Block::latest()->get();
+    $blocks = DB::table("blocks")
+    ->leftjoin('block_user', 'blocks.id', '=', 'block_user.block_id')
+    ->leftjoin('users', 'users.id', '=', 'block_user.user_id')
+    ->select('blocks.id as id','blocks.block_title as block_title','users.batch as batch')
+    ->orderBy('blocks.id')
+    ->groupBy('blocks.id')
+    ->get();
+
     $user = Auth::user();
 
     // return response()->json($blocks);
@@ -78,6 +86,9 @@ class BlockController extends Controller
         return redirect('/blocks')->with('success', 'Block has been updated');
       }
     }
+    else { // if no students selected
+      return redirect('/blocks');
+    }
 
   }
 
@@ -133,6 +144,19 @@ class BlockController extends Controller
     else{
       return $stuList;
     }
+
+  }
+
+  public function block_clear ($id){
+
+    $result = UserBlock::where('block_id', $id)->delete();
+    if ($result){
+      return redirect('/blocks')->with('success', 'Block has been cleared');
+    }
+    else {
+      return redirect('/blocks')->with('warning', 'Something wrong happened, please try again');
+    }
+
 
   }
 
