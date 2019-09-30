@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Auth;
+use App\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
@@ -137,6 +138,22 @@ class UserController extends Controller
    }
 
     }
+
+    public function addUserGroup(Request $request)
+    {
+      $user = User::findorfail($request->user_id);
+      $user->group()->syncWithoutDetaching($request->group_id);
+      return back();
+    }
+
+    public function removeUserGroup($group_id, $user_id)
+{
+    $user = User::findorfail($user_id);
+
+    $user->group()->detach($group_id);
+
+    return back();
+}
 
     /**
      * Remove the specified resource from storage.
