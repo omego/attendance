@@ -91,12 +91,62 @@
 
                             </p>
                             <p>
-                                    <div id="error" class="alert alert-danger">
+ <!-- Tutorial -->
 
-                                    </div>
-                                    <div id="success" class="alert alert-success">
-
+                                  <div class="alert alert-danger">
+                                    <div id="error"></div>
+                                    <div id="tutorial">                   
+                                      <button type="button" class="btn btn-link" data-toggle="modal" data-target="#tutorialModal">
+                                            To Enable location check here
+                                      </button>
+                                      
+                                      <div class="modal fade" id="tutorialModal" tabindex="-1" role="dialog" aria-labelledby="tutorial" data-dismiss="modal" aria-label="Close" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                                          <div class="modal-content">
+                                          
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="tutorialModal">Enable Geolocation</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                  </div>
+                                            
+                                            <div class="modal-body">
+                                                  <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                                  <li class="nav-item active">
+                                                    <a class="nav-link in active" id="iphone-tab" data-toggle="tab" href="#iphone" role="tab" aria-controls="home" aria-selected="true">iPhone</a>
+                                                  </li>
+                                                  <li class="nav-item">
+                                                    <a class="nav-link" id="androied-tab" data-toggle="tab" href="#android" role="tab" aria-controls="profile" aria-selected="false">Android</a>
+                                                  </li>
+                                                </ul> 
+                                          
+                                                <div class="tab-content">
+                                                    <div id="iphone" class="tab-pane fade show active">
+                                                      <br>
+                                                      <b style="font-size:15px" >To Enable Location Services Please Follow the Instructions:</b>
+                                                      <p style="font-size:15px" >Settings > privacy > location Services > Safari > While Using the App</p>
+                                                      <img src="storage/iphone1.png"style="width:165.9px;height:317.8px;">
+                                                      <img src="storage/iphone2.png"style="width:165.9px;height:317.8px;">
+                                                    </div>
+                                                    <div id="android" class="tab-pane fade">
+                                                    <br>
+                                                      <b style="font-size:15px" >To Enable Location Services Please Follow the Instructions:</b>
+                                                      <p style="font-size:15px" >Settings > site Settings > Location > On</p>
+                                                      <img src="storage/android1.png"style="width:165.9px;height:317.8px;">
+                                                      <img src="storage/android2.png"style="width:165.9px;height:317.8px;">
+                                                      <img src="storage/android3.png"style="width:165.9px;height:317.8px;">
+                                                    </div>
+                                            </div>
+                                          </div>
                                         </div>
+                                      </div>
+                                   </div>
+ <!-- /Tutorial -->
+                                    </div>
+                                  </div>
+                                   
+                                    <div id="success" class="alert alert-success"></div>
 
                             </p>
                             <p>
@@ -129,15 +179,14 @@
                                     @endforeach
                                 </tbody>
                               </table>
+                                    <!-- -- Modal --> 
+     
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-
-
-      <!-- Modal -->
       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
                 <form method="post" action="{{ route('attendancesheets.store') }}">

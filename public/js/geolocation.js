@@ -7,7 +7,7 @@
         document.getElementById('attendBtn').style.display = "none";
         document.getElementById('success').style.display = "none";
         document.getElementById('error').style.display = "none";
-
+        document.getElementById('tutorial').style.display = "none";
         if (navigator.geolocation) {
 
           startPosLat = 21.423092;
@@ -60,6 +60,7 @@
               case error.PERMISSION_DENIED:
                   document.getElementById('spinner').style.display = "none";
                   document.getElementById('error').style.display = "block";
+                  document.getElementById('tutorial').style.display = "block";
                   document.getElementById("error").innerHTML = "You've denied the request for Geolocation (location services), please follow this instructions to allow the website to use your location.\notherwise you will not be able to register your attendance.";
                   break;
               case error.POSITION_UNAVAILABLE:
