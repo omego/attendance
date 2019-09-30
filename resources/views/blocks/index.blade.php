@@ -23,7 +23,9 @@
         <tr>
           <td>ID</td>
           <td>Block Title</td>
-          <td>Action</td>
+          <td>Batch Number</td>
+          <td>Edit</td>
+          <td>Clear</td>
         </tr>
     </thead>
     <tbody>
@@ -31,7 +33,13 @@
         <tr>
             <td>{{$block->id}}</td>
             <td>{{$block->block_title}}</td>
+            <td>{{$block->batch}}</td>
             <td><a href="{{ route('blocks.edit',$block->id)}}" class="btn btn-primary">Edit</a></td>
+            <td>
+              @if ($block->batch)
+              <a onclick="return confirm('Are you sure?')" href="{{ route('block.clear',$block->id)}}" class="btn btn-warning">Clear</a>
+              @endif
+            </td>
             <td>
 
             </td>

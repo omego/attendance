@@ -71,6 +71,9 @@ Route::group(['middleware' => ['role:admin']], function () {
   // show all students of selected batch
   Route::get('dynamic/batch/{id}/block/{bid}', '\App\Http\Controllers\BlockController@dynamic_dependent');
 
+  // clear block
+  Route::get('block/clear/{id}', '\App\Http\Controllers\BlockController@block_clear')->name('block.clear');
+
 });
 Route::get('/attendance', 'AttendanceSheetController@index')->name('attendance')->middleware('permission:attendance sheet');
 

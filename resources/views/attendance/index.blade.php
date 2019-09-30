@@ -27,7 +27,7 @@
           <td>Badge</td>
           <td>Date/Time</td>
           <td>GPS</td>
-          
+
           {{-- <td>Groups</td> --}}
 
         </tr>
@@ -37,12 +37,18 @@
   @foreach($attendancesheets as $attendancesheet)
     <tr>
       <td>{{$attendancesheet->user->name}}</td>
-      <td><b>{{$attendancesheet->block->block_title}}</b></td>
+
+      <td>
+        @if (isset($attendancesheet->block->block_title))
+        <b>{{$attendancesheet->block->block_title}}</b>
+        @endif
+      </td>
+
       <td><b>{{$attendancesheet->beacon}}</b></td>
       <td>{{$attendancesheet->user->student_number}}</td>
       <td>{{$attendancesheet->user->badge_number}}</td>
       <td>{{$attendancesheet['created_at']}} <b>({{$attendancesheet['created_at']->diffForHumans()}})</b></td>
-      <td><a href="https://maps.googleapis.com/maps/api/staticmap?center={{$attendancesheet->coords}}&zoom=16&scale=2&size=600x400&maptype=roadmap&key=AIzaSyBGCql0HlN4C_D7B2BcIIhtuFvjrdfvoew&format=png&visual_refresh=true&markers=size:small%7Ccolor:0x171faa%7Clabel:1%7C{{$attendancesheet->coords}}">Map</a></td>
+      <td><a target="_blank" href="https://www.google.com/search?q={{$attendancesheet->coords}}">Map</a></td>
     {{-- <td>
 
       @if(!empty($user->group))

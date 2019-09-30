@@ -202,10 +202,16 @@
                     <div class="form-group">
                             <label for="exampleFormControlSelect1">Block</label>
                             <select class="form-control" name="block_id" required>
-                              <option selected value> -- Please Select a Block -- </option>
+
+                              @if ($blocks->isNotEmpty())
+
                               @foreach ($blocks as $block)
                                 <option value="{{$block->id}}">{{$block->block_title}}</option>
                               @endforeach
+
+                            @else
+                              <option selected value> -- You are not assigned to any blocks -- </option>
+                              @endif
                             </select>
                             <input type="text" class="form-control" name="user_id" value="{{$user->id}}" hidden />
                             <div id="coords"></div>
