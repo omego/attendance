@@ -126,16 +126,16 @@
                                                       <br>
                                                       <b style="font-size:15px" >To Enable Location Services Please Follow the Instructions:</b>
                                                       <p style="font-size:15px" >Settings > privacy > location Services > Safari > While Using the App</p>
-                                                      <img src="storage/iphone1.png"style="width:165.9px;height:317.8px;">
-                                                      <img src="storage/iphone2.png"style="width:165.9px;height:317.8px;">
+                                                      <img src="/images/iphone1.png" style="width:165.9px;height:317.8px;">
+                                                      <img src="/images/iphone2.png" style="width:165.9px;height:317.8px;">
                                                     </div>
                                                     <div id="android" class="tab-pane fade">
                                                     <br>
                                                       <b style="font-size:15px" >To Enable Location Services Please Follow the Instructions:</b>
                                                       <p style="font-size:15px" >Settings > site Settings > Location > On</p>
-                                                      <img src="storage/android1.png"style="width:165.9px;height:317.8px;">
-                                                      <img src="storage/android2.png"style="width:165.9px;height:317.8px;">
-                                                      <img src="storage/android3.png"style="width:165.9px;height:317.8px;">
+                                                      <img src="/images/android1.png"style="width:165.9px;height:317.8px;">
+                                                      <img src="/images/android2.png"style="width:165.9px;height:317.8px;">
+                                                      <img src="/images/android3.png"style="width:165.9px;height:317.8px;">
                                                     </div>
                                             </div>
                                           </div>
