@@ -93,7 +93,7 @@
                             <p>
  <!-- Tutorial -->
 
-                                  <div id="highlight" class="alert alert-danger">
+                                  <div class="alert alert-danger">
                                     <div id="error"></div>
                                     <div id="tutorial">                   
                                       <button type="button" class="btn btn-link" data-toggle="modal" data-target="#tutorialModal">
