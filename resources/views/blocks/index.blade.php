@@ -36,16 +36,7 @@
             <td>{{$block->block_title}}</td>
             <td>{{$block->batch}}</td>
             <td>
-
-            @if(!empty($block->group))
-            @foreach($block->group as $blockGroup)
-              {{$blockGroup->group_name}} <br>
-            @endforeach
-              @else
-
-                No Groups
-
-              @endif
+            {{$block->group_id}}
             </td>
             <td><a href="{{ route('blocks.edit',$block->id)}}" class="btn btn-primary">Edit</a></td>
             <td>

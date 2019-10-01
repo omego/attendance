@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGroupBlockTable extends Migration
+class AddGroupIdToBlockTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateGroupBlockTable extends Migration
      */
     public function up()
     {
-        Schema::create('group_block', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('group_id')->unsigned()->nullable();
-            $table->integer('block_id')->unsigned()->nullable();
+        Schema::table('blocks', function (Blueprint $table) {
+            $table->string('group_id')->after('block_title')->nullable();
         });
     }
 
@@ -27,6 +25,8 @@ class CreateGroupBlockTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('group_block');
+        Schema::table('blocks', function (Blueprint $table) {
+            $table->dropColumn('group_id');
+        });
     }
 }

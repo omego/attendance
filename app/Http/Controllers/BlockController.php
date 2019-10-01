@@ -18,13 +18,13 @@ class BlockController extends Controller
     $blocks = DB::table("blocks")
     ->leftjoin('block_user', 'blocks.id', '=', 'block_user.block_id')
     ->leftjoin('users', 'users.id', '=', 'block_user.user_id')
-    ->select('blocks.id as id','blocks.block_title as block_title','users.batch as batch')
+    ->select('blocks.id as id','blocks.block_title as block_title','blocks.group_id as group_id','users.batch as batch')
     ->orderBy('blocks.id')
     ->groupBy('blocks.id')
     ->get();
 
     $user = Auth::user();
-
+    
     // return response()->json($blocks);
     return view('blocks.index', compact('blocks'));
   }

@@ -14,6 +14,6 @@ class Group extends Model
     }
     public function block()
     {
-        return $this->belongsToMany('App\Block','group_block', 'group_id', 'block_id');
+        return $this->hasMany('App\Block');
     }
 }

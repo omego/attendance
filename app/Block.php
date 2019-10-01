@@ -10,6 +10,6 @@ class Block extends Model
 
     public function group()
     {
-        return $this->belongsToMany('App\Group','group_block', 'block_id', 'group_id');
+        return $this->belongsTo('App\Group');
     } 
 }
