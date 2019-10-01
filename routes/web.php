@@ -52,7 +52,9 @@ Route::group(['middleware' => ['role:admin']], function () {
 
   //Groups Routes
   Route::resource('group','GroupController');
-
+  // assign user to a group
+  Route::post('users/addUserGroup','UserController@addUserGroup');
+  Route::get('users/removeUserGroup/{user_id}/{group_id}','\App\Http\Controllers\UserController@removeUserGroup');
   Route::resource('permissions','PermissionController');
   Route::resource('roles','RoleController');
 

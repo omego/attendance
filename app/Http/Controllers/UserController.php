@@ -78,13 +78,13 @@ class UserController extends Controller
        $user = Auth::user();
        // if ($user->hasRole('SuperAdmin')) {
          $user = \App\User::findOrfail($id);
-         // $userGroups = $user->group;
-         // $groups = \App\Group::all();
+         $userGroups = $user->group;
+         $groups = \App\Group::all();
          $roles = Role::all()->pluck('name');
          $userRoles = $user->roles;
          $permissions = Permission::all()->pluck('name');
          $userPermissions = $user->permissions;
-         return view('users.edit', compact('user', 'roles', 'userRoles', 'permissions', 'userPermissions'));
+         return view('users.edit', compact('user', 'roles', 'userRoles', 'permissions', 'userPermissions','groups', 'userGroups'));
        // }elseif ($user->hasRole('Admin')) {
          // $user = \App\User::whereNotIn('id', [1, 3])->findOrfail($id);
          // $roles = Role::all()->pluck('name');

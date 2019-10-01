@@ -102,7 +102,7 @@
                        </div>
 
 
-             {{-- <div class="form-group">
+             <div class="form-group">
              <h5>Add user to groups</h5>
              </div>
 
@@ -127,7 +127,7 @@
                                    @foreach($userGroups as $userGroup)
                                      <a class='btn btn-primary' href='{{url('users/removeUserGroup')}}/{{$userGroup->id}}/{{$user->id}}' data-activates=''><i class="fas fa-trash-alt"></i> {{$userGroup->group_name}}</a>
                                    @endforeach
-                                 </div> --}}
+                                 </div>
 
   			<form action="{{ route('users.update', $user->id) }}" method = "post">
           @method('PATCH')
