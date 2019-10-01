@@ -52,6 +52,11 @@
                                     <a class="nav-link" href="{{ route('blocks.index') }}">Blocks</a>
                                     </li>
                                   @endcan
+                                  @can('Groups')
+                            <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('group.index') }}">Groups</a>
+                                    </li>
+                                  @endcan
                                   @can('export')
                                     <li class="nav-item">
                                             <a class="nav-link" href="{{ route('exports.index') }}">Export</a>

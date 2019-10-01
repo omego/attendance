@@ -26,7 +26,7 @@
         <tr>
           <td>User</td>
           <td>Email</td>
-          {{-- <td>Groups</td> --}}
+          <td>Groups</td>
           <td>Roles</td>
           <td>Permissions</td>
         </tr>
@@ -40,7 +40,7 @@
     <td class="muted-text">
       {{$user->email}}
     </td>
-    {{-- <td>
+    <td>
 
       @if(!empty($user->group))
       @foreach($user->group as $userGroup)
@@ -51,7 +51,7 @@
           No Groups
 
         @endif
-    </td> --}}
+    </td>
     <td>
 
         @if(!empty($user->roles))
