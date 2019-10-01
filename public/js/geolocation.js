@@ -36,6 +36,7 @@
               
               // $("#message").text("Yes, you're inside radius (100 Meters) 🎉");
               document.getElementById('spinner').style.display = "none";
+              document.getElementById('highlight').style.display = "none";
               document.getElementById('success').style.display = "block";
               document.getElementById("success").innerHTML = "You can record your attendance";
               document.getElementById('attendBtn').style.display = "block";
