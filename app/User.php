@@ -32,7 +32,7 @@ class User extends Authenticatable
 
     public function blocks()
     {
-      return $this->belongsToMany('App\Block');
+      return $this->belongsToMany('App\Block','block_user', 'user_id', 'block_id');
     }
 
     public function group()

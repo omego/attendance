@@ -42,7 +42,7 @@
     </td>
     <td>
 
-      @if(!empty($user->group))
+      @if(!empty($user->group->first()))
       @foreach($user->group as $userGroup)
         {{$userGroup->group_name}} <br>
       @endforeach
