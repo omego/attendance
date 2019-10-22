@@ -40,8 +40,8 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Group','group_user', 'user_id', 'group_id');
     }
 
-    public function collage()
+    public function college()
     {
-      return $this->belongsTo('App\Collage');
+      return $this->belongsTo('App\College');
     }
 }
