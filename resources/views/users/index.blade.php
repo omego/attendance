@@ -27,6 +27,7 @@
           <td>User</td>
           <td>Email</td>
           <td>Groups</td>
+          <td>College</td>
           <td>Roles</td>
           <td>Permissions</td>
         </tr>
@@ -51,6 +52,15 @@
           No Groups
 
         @endif
+    </td>
+    <td>
+      @if(!empty($user->college->name))
+
+      {{$user->college->name}}
+
+      @else
+      No College
+      @endif
     </td>
     <td>
 

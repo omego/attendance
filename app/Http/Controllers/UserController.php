@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\College;
 use Auth;
 use App\Group;
 use Illuminate\Http\Request;
@@ -23,7 +24,6 @@ class UserController extends Controller
     {
         //
         $users = User::paginate(15);
-        
         return view('users.index', compact('users'));
     }
 
@@ -84,7 +84,9 @@ class UserController extends Controller
          $userRoles = $user->roles;
          $permissions = Permission::all()->pluck('name');
          $userPermissions = $user->permissions;
-         return view('users.edit', compact('user', 'roles', 'userRoles', 'permissions', 'userPermissions','groups', 'userGroups'));
+
+         $colleges = \App\College::all();
+         return view('users.edit', compact('user', 'roles', 'userRoles', 'permissions', 'userPermissions','groups', 'colleges' , 'userGroups'));
        // }elseif ($user->hasRole('Admin')) {
          // $user = \App\User::whereNotIn('id', [1, 3])->findOrfail($id);
          // $roles = Role::all()->pluck('name');
@@ -125,6 +127,9 @@ class UserController extends Controller
        $user->name = $request->name;
        $user->badge_number = $request->badge_number;
        $user->student_number = $request->student_number;
+       $user->batch = $request->batch_number;
+       $user->college_id = $request->college_id;
+
        if(!empty($request->input('password')))
      {
          $user->password = Hash::make($request->password);
