@@ -5,7 +5,7 @@
 <div class = 'container'>
   <div class="card uper">
     <div class="card-header">
-      Edit Colloge
+      Edit College
     </div>
     <div class="card-body">
       @if ($errors->any())

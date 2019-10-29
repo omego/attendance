@@ -54,8 +54,7 @@ Route::group(['middleware' => ['role:admin']], function () {
   Route::resource('group','GroupController');
   //Colloges Routes
   Route::resource('college','CollegeController');
-  
-  
+
   // assign user to a group
   Route::post('users/addUserGroup','UserController@addUserGroup');
   Route::get('users/removeUserGroup/{user_id}/{group_id}','\App\Http\Controllers\UserController@removeUserGroup');
