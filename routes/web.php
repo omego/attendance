@@ -77,6 +77,9 @@ Route::group(['middleware' => ['role:admin']], function () {
   Route::get('block/clear/{id}', '\App\Http\Controllers\BlockController@block_clear')->name('block.clear');
 
 });
+
+Route::get('checkAttendanceTime', '\App\Http\Controllers\HomeController@checkAttendanceTime');
+
 Route::get('/attendance', 'AttendanceSheetController@index')->name('attendance')->middleware('permission:attendance sheet');
 
 Route::get('/problems', 'ProblemController@index')->name('problem')->middleware('permission:problems');
