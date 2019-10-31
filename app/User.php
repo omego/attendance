@@ -44,4 +44,11 @@ class User extends Authenticatable
     {
       return $this->belongsTo('App\College');
     }
+
+    public static function boot()
+  {
+    parent::boot();
+
+    static::addGlobalScope(new Scopes\GlobalScope);
+  }
 }

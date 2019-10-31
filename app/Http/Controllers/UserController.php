@@ -76,7 +76,7 @@ class UserController extends Controller
      public function edit($id)
      {
        $user = Auth::user();
-       // if ($user->hasRole('SuperAdmin')) {
+
          $user = \App\User::findOrfail($id);
          $userGroups = $user->group;
          $groups = \App\Group::all();
@@ -86,16 +86,8 @@ class UserController extends Controller
          $userPermissions = $user->permissions;
 
          $colleges = \App\College::all();
-         return view('users.edit', compact('user', 'roles', 'userRoles', 'permissions', 'userPermissions','groups', 'colleges' , 'userGroups'));
-       // }elseif ($user->hasRole('Admin')) {
-         // $user = \App\User::whereNotIn('id', [1, 3])->findOrfail($id);
-         // $roles = Role::all()->pluck('name');
-         // $userRoles = $user->roles;
-    //     return view('users.edit', compact('user', 'roles', 'userRoles'));
-    // }else{
-    //   return abort(401, 'Unauthorized action.');
-    // }
-
+         return view('users.edit', compact('user', 'roles', 'userRoles', 'permissions', 'userPermissions','groups', 'colleges', 'userGroups'));
+  
      }
 
     /**

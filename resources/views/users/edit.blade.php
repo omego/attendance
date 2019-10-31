@@ -151,15 +151,15 @@
         </div>
 
         <div class="form-group">
-          <label for="badge">Batch</label>
+          <label for="batch">Batch</label>
           <input type="text" class="form-control" name="batch_number" value="{{$user->batch}}"/>
         </div>
 
         <div class="form-group">
-          <label for="badge">College</label>
-          <select name="college_id" id="" class = "form-control">
+          <label for="college">College</label>
+          <select name="college_id" class = "form-control">
             @foreach($colleges as $college)
-            @if ($college->id == $user->college->id)
+            @if ($college->id == $user->college_id)
             <option value="{{$college->id}}" selected>{{$college->name}}</option>
             @else
             <option value="{{$college->id}}">{{$college->name}}</option>
