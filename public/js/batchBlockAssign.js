@@ -1,16 +1,5 @@
 $(document).ready(function() {
 
-  $(function() {
-
-    $("#newModalForm").validate({
-      rules: {
-        block_id: {
-          required: true,
-        },
-      },
-    });
-  });
-
   $('#selectAll').click(function() {
     if ($(this).prop('checked')) {
       $('.stuList').prop('checked', true);
@@ -64,3 +53,13 @@ $(document).ready(function() {
 
   });
 });
+
+jQuery(function($) {
+  $("#newModalForm").validate({
+      rules: {
+        block_id: {
+          required: true,
+        },
+      },
+    });
+  });
