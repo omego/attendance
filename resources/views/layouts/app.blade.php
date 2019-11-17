@@ -49,6 +49,11 @@
                                     <a class="nav-link" href="{{ route('attendance') }}">Attendance Sheet</a>
                                     </li>
                                   @endcan
+                      @can('absence calculator')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('absence') }}">Absence Calculator</a>
+                        </li>
+                      @endcan
                       @can('blocks')
                             <li class="nav-item">
                                     <a class="nav-link" href="{{ route('blocks.index') }}">Blocks</a>

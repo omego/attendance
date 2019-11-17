@@ -82,6 +82,9 @@ Route::get('checkAttendanceTime', '\App\Http\Controllers\HomeController@checkAtt
 
 Route::get('/attendance', 'AttendanceSheetController@index')->name('attendance')->middleware('permission:attendance sheet');
 
+Route::get('/absence', 'AbsenceController@index')->name('absence')->middleware('permission:absence calculator');
+Route::post('/absenceSheet', 'AbsenceController@absenceSheet')->name('absence.search')->middleware('permission:absence calculator');
+
 Route::get('/problems', 'ProblemController@index')->name('problem')->middleware('permission:problems');
 //Route::get('problems/create', 'ProblemController@create')->name('problem.create');
 Route::post('problem', 'ProblemController@store')->name('problem.store');
