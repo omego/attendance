@@ -46,10 +46,38 @@ class AbsenceController extends Controller
 
       $todayAbsence = array_diff($all_block_stu, $todayAttendance);
 
-      $absentList = User::select('*')->whereIn('id', $todayAbsence)->simplePaginate(3);
+      /*$absentList = DB::table('users')
+                  ->select('users.*', DB::raw('count(*) as total'))
+                  ->join('attendance_sheets', 'attendance_sheets.user_id', '=', 'users.id')
+                  ->whereIn('attendance_sheets.user_id', $todayAbsence)
+                  ->whereDate('attendance_sheets.created_at', Carbon::today())
+                  ->where('attendance_sheets.block_id', '=', $block_id)
+                  ->get();
+                  //->paginate(10);*/
+
+      $absentList = User::select('*')->whereIn('id', $todayAbsence)->get();
+
+      foreach ($absentList as $key => $value) {
+        $value->{'sessions'} = '';
+      }
+
+      foreach ($absentList as $key => $value) {
+        $count = AttendanceSheet::select('user_id')
+                ->whereDate('created_at', Carbon::today())
+                ->where('block_id', '=', $block_id)
+                ->where('user_id', '=', $value->id)
+                ->count();
+        if ($count > 0){
+          $value['sessions']=$count;
+        }
+        else{
+          $value['sessions']=0;
+        }
+      }
+
       /* End */
 
-      /* Today Partially or All Sessions Absence*/
+      /* Today Partially or All Sessions Absence
       $partiallyAttendance = AttendanceSheet::select('user_id', DB::raw('count(*) as total'))
                         ->whereDate('created_at', Carbon::today())
                         ->where('block_id', '=', $block_id)
@@ -62,8 +90,8 @@ class AbsenceController extends Controller
       $partiallyAbsentCount = User::select('*')->whereIn('id', $partiallyAbsence)->count();
       /* End */
 
-      //return Carbon::today();
-      return view('absence.index', compact('block','absentList','partiallyAbsentCount'));
+
+      return view('absence.index', compact('sessions_count','block','absentList'));
 
     }
 }

@@ -15,7 +15,7 @@
       <thead>
         <tr>
           <td>Name</td>
-          <td>Block</td>
+          <td>Sessions</td>
           <td>Number</td>
           <td>Badge</td>
           <td>Batch</td>
@@ -26,31 +26,18 @@
         @foreach($absentList as $absent)
         <tr>
           <td>{{$absent->name}}</td>
-          <td>{{$block->block_title}}</td>
+          <td>{{$absent->sessions}}/{{$sessions_count}}</td>
           <td>{{$absent->student_number}}</td>
           <td>{{$absent->badge_number}}</td>
           <td>{{$absent->batch}}</td>
         </tr>
         @endforeach
 
-        <tfoot>
-          <tr>
-            <td colspan="6">
-              <div class="text-left">
-                <ul> {{ $absentList->links() }} </ul>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="6">
-              <div class="text-left">
-                Total Number of Students Who Were Partially Absent: <b>{{$partiallyAbsentCount}}<b>
-              </div>
-            </td>
-          </tr>
-        </tfoot>
-      </table>
-
-    </div>
+  </table>
+  <div class="text-right">
+    <button type="submit" class="btn btn-primary">Export</button>
   </div>
+
+</div>
+</div>
 @endsection
