@@ -25,7 +25,9 @@
     <link href="{{ secure_url('css/geolocation.css') }}" rel="stylesheet">
     <link href="{{ secure_asset('css/loader.css') }}" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- Font Awesome v5.5 -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
     @stack('geolocation')
 
@@ -49,6 +51,11 @@
                                     <a class="nav-link" href="{{ route('attendance') }}">Attendance Sheet</a>
                                     </li>
                                   @endcan
+                      @can('absence calculator')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('absence') }}">Absence Calculator</a>
+                        </li>
+                      @endcan
                       @can('blocks')
                             <li class="nav-item">
                                     <a class="nav-link" href="{{ route('blocks.index') }}">Blocks</a>
