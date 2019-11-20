@@ -32,6 +32,23 @@ class User extends Authenticatable
 
     public function blocks()
     {
-      return $this->belongsToMany('App\Block');
+      return $this->belongsToMany('App\Block','block_user', 'user_id', 'block_id');
     }
+
+    public function group()
+    {
+        return $this->belongsToMany('App\Group','group_user', 'user_id', 'group_id');
+    }
+
+    public function college()
+    {
+      return $this->belongsTo('App\College');
+    }
+
+    public static function boot()
+  {
+    parent::boot();
+
+    static::addGlobalScope(new Scopes\GlobalScope);
+  }
 }

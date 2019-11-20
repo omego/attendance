@@ -26,7 +26,8 @@
         <tr>
           <td>User</td>
           <td>Email</td>
-          {{-- <td>Groups</td> --}}
+          <td>Groups</td>
+          <td>College</td>
           <td>Roles</td>
           <td>Permissions</td>
         </tr>
@@ -40,9 +41,9 @@
     <td class="muted-text">
       {{$user->email}}
     </td>
-    {{-- <td>
+    <td>
 
-      @if(!empty($user->group))
+      @if(!empty($user->group->first()))
       @foreach($user->group as $userGroup)
         {{$userGroup->group_name}} <br>
       @endforeach
@@ -51,7 +52,16 @@
           No Groups
 
         @endif
-    </td> --}}
+    </td>
+    <td>
+      @if(!empty($user->college->name))
+
+      {{$user->college->name}}
+
+      @else
+      No College
+      @endif
+    </td>
     <td>
 
         @if(!empty($user->roles))

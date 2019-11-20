@@ -20,6 +20,14 @@ class AttendanceSheetController extends Controller
 
     public function store(AttendanceSheetRequest $request)
     {
+      $request->validate([
+        'block_id'=>'required',
+      ]);
+
+      $current = Carbon::now();
+      $min = $current->minute ;
+
+      if($min <='15'){
         $fromDate = Carbon::parse(Carbon::now()->toFormattedDateString())->startOfDay();
         $toDate = Carbon::parse(Carbon::now()->toFormattedDateString())->endOfDay();
         $user = Auth::user();
@@ -31,10 +39,14 @@ class AttendanceSheetController extends Controller
             $attendancesheet = AttendanceSheet::create($request->all());
             return redirect('home')->with('success', 'Attendance has been taken');
         }
-else {
+        else {
             # code...
             return redirect('home')->with('danger', 'Attendance has been taken already!');
         }
+      }
+      else {
+        return redirect('home')->with('danger', 'The Attendance Finished!');
+      }
     }
 
     public function show($id)

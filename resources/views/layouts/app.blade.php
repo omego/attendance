@@ -11,8 +11,10 @@
 
     <!-- Scripts -->
     <script src="{{ secure_asset('js/app.js') }}" defer></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
     <script src="{{ secure_asset('js/batchBlockAssign.js') }}"></script>
+    <script src="{{ secure_asset('js/attendBut.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -23,7 +25,9 @@
     <link href="{{ secure_url('css/geolocation.css') }}" rel="stylesheet">
     <link href="{{ secure_asset('css/loader.css') }}" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- Font Awesome v5.5 -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
     @stack('geolocation')
 
@@ -47,9 +51,19 @@
                                     <a class="nav-link" href="{{ route('attendance') }}">Attendance Sheet</a>
                                     </li>
                                   @endcan
+                      @can('absence calculator')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('absence') }}">Absence Calculator</a>
+                        </li>
+                      @endcan
                       @can('blocks')
                             <li class="nav-item">
                                     <a class="nav-link" href="{{ route('blocks.index') }}">Blocks</a>
+                                    </li>
+                                  @endcan
+                                  @can('Groups')
+                            <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('group.index') }}">Groups</a>
                                     </li>
                                   @endcan
                                   @can('export')
@@ -63,16 +77,19 @@
                                                     </li>
                                                   @endcan
                                           @role('admin')
-                                            <li class="nav-item">
-                                                    <a class="nav-link" href="{{ route('users.index') }}">Users</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                            <a class="nav-link" href="{{ route('roles.index') }}">Roles</a>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                    <a class="nav-link" href="{{ route('permissions.index') }}">Permissions</a>
-                                                                    </li>
-                                                                    @endrole
+                                                <li class="nav-item">
+                                                <a class="nav-link" href="{{ route('users.index') }}">Users</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                <a class="nav-link" href="{{ route('roles.index') }}">Roles</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                <a class="nav-link" href="{{ route('permissions.index') }}">Permissions</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                <a class="nav-link" href="{{ route('college.index') }}">College</a>
+                                                </li>
+                                                @endrole
 
                     </ul>
 

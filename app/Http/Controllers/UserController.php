@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\College;
 use Auth;
+use App\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
@@ -74,24 +76,18 @@ class UserController extends Controller
      public function edit($id)
      {
        $user = Auth::user();
-       // if ($user->hasRole('SuperAdmin')) {
+
          $user = \App\User::findOrfail($id);
-         // $userGroups = $user->group;
-         // $groups = \App\Group::all();
+         $userGroups = $user->group;
+         $groups = \App\Group::all();
          $roles = Role::all()->pluck('name');
          $userRoles = $user->roles;
          $permissions = Permission::all()->pluck('name');
          $userPermissions = $user->permissions;
-         return view('users.edit', compact('user', 'roles', 'userRoles', 'permissions', 'userPermissions'));
-       // }elseif ($user->hasRole('Admin')) {
-         // $user = \App\User::whereNotIn('id', [1, 3])->findOrfail($id);
-         // $roles = Role::all()->pluck('name');
-         // $userRoles = $user->roles;
-    //     return view('users.edit', compact('user', 'roles', 'userRoles'));
-    // }else{
-    //   return abort(401, 'Unauthorized action.');
-    // }
 
+         $colleges = \App\College::all();
+         return view('users.edit', compact('user', 'roles', 'userRoles', 'permissions', 'userPermissions','groups', 'colleges', 'userGroups'));
+  
      }
 
     /**
@@ -123,6 +119,9 @@ class UserController extends Controller
        $user->name = $request->name;
        $user->badge_number = $request->badge_number;
        $user->student_number = $request->student_number;
+       $user->batch = $request->batch_number;
+       $user->college_id = $request->college_id;
+
        if(!empty($request->input('password')))
      {
          $user->password = Hash::make($request->password);
@@ -167,6 +166,22 @@ class UserController extends Controller
  //
  //     return back();
  // }
+
+    public function addUserGroup(Request $request)
+    {
+    $user = User::findorfail($request->user_id);
+    $user->group()->syncWithoutDetaching($request->group_id);
+    return back();
+    }
+
+    public function removeUserGroup($group_id, $user_id)
+    {
+    $user = User::findorfail($user_id);
+
+    $user->group()->detach($group_id);
+
+    return back();
+    }
 
      /**
      * Assign Role to user.

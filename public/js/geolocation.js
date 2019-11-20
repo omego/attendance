@@ -6,8 +6,7 @@
 
         document.getElementById('attendBtn').style.display = "none";
         document.getElementById('success').style.display = "none";
-        document.getElementById('error').style.display = "none";
-
+        document.getElementById('highlight').style.display = "none";
         if (navigator.geolocation) {
 
           startPosLat = 21.423092;
@@ -37,6 +36,7 @@
               
               // $("#message").text("Yes, you're inside radius (100 Meters) 🎉");
               document.getElementById('spinner').style.display = "none";
+              document.getElementById('highlight').style.display = "none";
               document.getElementById('success').style.display = "block";
               document.getElementById("success").innerHTML = "You can record your attendance";
               document.getElementById('attendBtn').style.display = "block";
@@ -46,8 +46,9 @@
 
             }else if(distance > .05){
               document.getElementById('attendBtn').style.display = "none";
-              document.getElementById('error').style.display = "block";
+              document.getElementById('highlight').style.display = "block";
               document.getElementById('success').style.display = "none";
+              document.getElementById('tutorial').style.display = "none";
               document.getElementById("mapholder").innerHTML = "<img style='width: 100%;' src='"+img_url+"'>";
               document.getElementById("error").innerHTML = "You are outside the attendance enabled location";
 
@@ -59,8 +60,9 @@
            switch(error.code) {
               case error.PERMISSION_DENIED:
                   document.getElementById('spinner').style.display = "none";
-                  document.getElementById('error').style.display = "block";
-                  document.getElementById("error").innerHTML = "You've denied the request for Geolocation (location services), please follow this instructions to allow the website to use your location.\notherwise you will not be able to register your attendance.";
+                  document.getElementById('success').style.display = "none";
+                  document.getElementById('highlight').style.display = "block";
+                  document.getElementById("error").innerHTML = "You've denied the request for Geolocation (location services), please follow this instructions to allow the website to use your location. otherwise you will not be able to register your attendance.";
                   break;
               case error.POSITION_UNAVAILABLE:
                   console.log("Location information is unavailable.");

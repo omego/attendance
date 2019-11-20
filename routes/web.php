@@ -52,7 +52,12 @@ Route::group(['middleware' => ['role:admin']], function () {
 
   //Groups Routes
   Route::resource('group','GroupController');
+  //Colloges Routes
+  Route::resource('college','CollegeController');
 
+  // assign user to a group
+  Route::post('users/addUserGroup','UserController@addUserGroup');
+  Route::get('users/removeUserGroup/{user_id}/{group_id}','\App\Http\Controllers\UserController@removeUserGroup');
   Route::resource('permissions','PermissionController');
   Route::resource('roles','RoleController');
 
@@ -71,8 +76,17 @@ Route::group(['middleware' => ['role:admin']], function () {
   // show all students of selected batch
   Route::get('dynamic/batch/{id}/block/{bid}', '\App\Http\Controllers\BlockController@dynamic_dependent');
 
+  // clear block
+  Route::get('block/clear/{id}', '\App\Http\Controllers\BlockController@block_clear')->name('block.clear');
+
 });
+
+Route::get('checkAttendanceTime', '\App\Http\Controllers\HomeController@checkAttendanceTime');
+
 Route::get('/attendance', 'AttendanceSheetController@index')->name('attendance')->middleware('permission:attendance sheet');
+
+Route::get('/absence', 'AbsenceController@index')->name('absence')->middleware('permission:absence calculator');
+Route::post('/absenceSheet', 'AbsenceController@absenceSheet')->name('absence.search')->middleware('permission:absence calculator');
 
 Route::get('/problems', 'ProblemController@index')->name('problem')->middleware('permission:problems');
 //Route::get('problems/create', 'ProblemController@create')->name('problem.create');

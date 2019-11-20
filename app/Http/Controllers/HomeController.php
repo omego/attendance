@@ -40,4 +40,19 @@ class HomeController extends Controller
         ->get();
         return view('home',compact('blocks', 'user', 'UserAttendance'));
     }
+
+    public function checkAttendanceTime()
+    {
+      $current = Carbon::now();
+      $min = $current->minute ;
+      $chech = 0;
+      if($min <='15'){
+        $chech = 1;
+        return $chech;
+      }
+      else{
+        return $chech;
+      }
+    }
+
 }

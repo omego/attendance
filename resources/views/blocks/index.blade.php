@@ -23,15 +23,42 @@
         <tr>
           <td>ID</td>
           <td>Block Title</td>
-          <td>Action</td>
+          <td>Batch Number</td>
+          <td>Group</td>
+          <td>Edit</td>
+          <td>Clear</td>
         </tr>
     </thead>
     <tbody>
+    
         @foreach($blocks as $block)
         <tr>
             <td>{{$block->id}}</td>
             <td>{{$block->block_title}}</td>
+            <td>
+            @if(!empty($block->user->first()))
+              @foreach($block->user as $userBatch)
+              @if ($loop->first)
+                {{$userBatch->batch}} <br>
+                @endif
+              @endforeach
+                @else
+                  No User
+              @endif
+            </td>
+            <td>   
+            @if(!empty($block->group->group_name))
+           {{$block->group->group_name}}
+           @else
+  No Group
+           @endif
+            </td>
             <td><a href="{{ route('blocks.edit',$block->id)}}" class="btn btn-primary">Edit</a></td>
+            <td>
+              @if ($block->user->first())
+              <a onclick="return confirm('Are you sure?')" href="{{ route('block.clear',$block->id)}}" class="btn btn-warning">Clear</a>
+              @endif
+            </td>
             <td>
 
             </td>
