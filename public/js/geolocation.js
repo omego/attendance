@@ -38,7 +38,7 @@
               document.getElementById('spinner').style.display = "none";
               document.getElementById('highlight').style.display = "none";
               document.getElementById('success').style.display = "block";
-              document.getElementById("success").innerHTML = "You can record your attendance";
+              document.getElementById("success").innerHTML = "You are inside the allowed attendance area";
               document.getElementById('attendBtn').style.display = "block";
               document.getElementById("mapholder").innerHTML = "<img style='width: 100%;' src='"+img_url+"'>";
               document.getElementById("coords").innerHTML = "<input id='coords' type='text' name='coords' value='"+latlon+"' hidden />";
