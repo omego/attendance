@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\AttendanceSheet;
-use App\UserBlock;
 use App\Http\Requests\AbsenceSheetRequest;
 use App\Block;
 use App\User;
@@ -16,7 +15,8 @@ class AbsenceController extends Controller
     public function index()
     {
       $blocks = Block::all();
-      return view('absence.calculator',compact('blocks'));
+      $batches = User::select('batch')->where('batch' , '!=', 'null')->distinct()->get();
+      return view('absence.calculator',compact('blocks','batches'));
     }
 
     public function absenceSheet(AbsenceSheetRequest $request)
@@ -24,46 +24,64 @@ class AbsenceController extends Controller
 
       $request->validate([
         'sessions_count'=>'required',
-        'block_id'=>'required'
+        'block_id'=>'required',
+        'batch_number'=>'required'
       ]);
 
       $sessions_count = $request->sessions_count;
       $block_id = $request->block_id;
+      $batch_number = $request->batch_number;
 
       $block = Block::findOrFail($block_id);
 
-      $all_block_stu = UserBlock::select('user_id')
-                      ->where('block_id','=',$block_id)->pluck('user_id')->toArray();
+      $all_batch_stu = User::select('id')
+                      ->where('batch','=',$batch_number)
+                      ->pluck('id')->toArray();
 
       /* Today Absence */
       $todayAttendance = AttendanceSheet::select('user_id', DB::raw('count(*) as total'))
                         ->whereDate('created_at', Carbon::today())
                         ->where('block_id', '=', $block_id)
+                        ->whereIn('user_id', $all_batch_stu)
                         ->groupBy('user_id')
                         ->having('total','=',$sessions_count)
                         ->pluck('user_id')->toArray();
 
 
-      $todayAbsence = array_diff($all_block_stu, $todayAttendance);
+      $todayAbsence = array_diff($all_batch_stu, $todayAttendance);
 
-      $absentList = User::select('*')->whereIn('id', $todayAbsence)->simplePaginate(3);
-      /* End */
+      $absentList = User::select('*')->whereIn('id', $todayAbsence)->get();
 
-      /* Today Partially or All Sessions Absence*/
-      $partiallyAttendance = AttendanceSheet::select('user_id', DB::raw('count(*) as total'))
-                        ->whereDate('created_at', Carbon::today())
-                        ->where('block_id', '=', $block_id)
-                        ->groupBy('user_id')
-                        ->having('total','<',$sessions_count)
-                        ->pluck('user_id')->toArray();
+      foreach ($absentList as $key => $value) {
+        $value->{'count'} = '';
+        $value->{'sessions'} = '';
+      }
 
-      $partiallyAbsence = array_diff($all_block_stu, $todayAttendance);
+      foreach ($absentList as $key => $value) {
+        $count = AttendanceSheet::select('user_id')
+                ->whereDate('created_at', Carbon::today())
+                ->where('block_id', '=', $block_id)
+                ->where('user_id', '=', $value->id)
+                ->whereIn('user_id', $all_batch_stu)
+                ->count();
 
-      $partiallyAbsentCount = User::select('*')->whereIn('id', $partiallyAbsence)->count();
-      /* End */
+      $sessions = AttendanceSheet::select(DB::raw('TIME(created_at) as time'))
+              ->whereDate('created_at', Carbon::today())
+              ->where('block_id', '=', $block_id)
+              ->where('user_id', '=', $value->id)
+              ->whereIn('user_id', $all_batch_stu)
+              ->get();
 
-      //return Carbon::today();
-      return view('absence.index', compact('block','absentList','partiallyAbsentCount'));
+        if ($count > 0){
+          $value['count']=$count;
+          $value['sessions']=$sessions;
+        }
+        else{
+          $value['count']=0;
+          $value['sessions']=0;
+        }
+      }
 
+      return view('absence.index', compact('batch_number','sessions_count','block','absentList'));
     }
 }

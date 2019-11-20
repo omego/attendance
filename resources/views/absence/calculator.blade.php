@@ -25,6 +25,16 @@
         </div>
 
         <div class="form-group">
+          <label for="name">Batch</label>
+          <select class="form-control" name="batch_number" required/>
+          <option value="">Select a Batch</option>
+          @foreach ($batches as $batch)
+          <option value="{{$batch->batch}}">{{$batch->batch}}</option>
+          @endforeach
+        </select>
+        </div>
+
+        <div class="form-group">
           <label for="name">Total Number of Sessions</label>
           <input type="number" class="form-control" name="sessions_count" required/>
         </div>
