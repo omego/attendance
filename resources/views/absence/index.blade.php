@@ -10,12 +10,15 @@
     <div class="card-header">
       Today Absence
     </div>
-
-    <div role="group" class="mb-2 mt-2 ml-2">
-      <h5><span class="badge badge-info"> Block Title: {{$block->block_title}}</span></h5>
-      <h5><span class="badge badge-info"> Batch Number: {{$batch_number}}</span></h5>
-      <h5><span class="badge badge-info"> Total Sessions: {{$sessions_count}}</span></h5>
+    <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+      <h3><span class="badge badge-secondary"> Block Title: {{$block->block_title}}</span>
+      <span class="badge badge-secondary"> Batch Number: {{$batch_number}}</span>
+      <span class="badge badge-secondary"> Total Sessions: {{$sessions_count}}</span></h3>
+      </div>
     </div>
+  </div>
 
     <table class="table table-striped">
       <thead>
