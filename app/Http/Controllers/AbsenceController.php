@@ -15,7 +15,11 @@ class AbsenceController extends Controller
     public function index()
     {
       $blocks = Block::all();
-      $batches = User::select('batch')->where('batch' , '!=', 'null')->distinct()->get();
+      $batches = User::select('batch')
+                ->where('batch' , '!=', 'null')
+                ->distinct()
+                ->orderBy('batch', 'ASC')
+                ->get();
       return view('absence.calculator',compact('blocks','batches'));
     }
 
@@ -25,12 +29,14 @@ class AbsenceController extends Controller
       $request->validate([
         'sessions_count'=>'required',
         'block_id'=>'required',
-        'batch_number'=>'required'
+        'batch_number'=>'required',
+        'date'=>'required'
       ]);
 
       $sessions_count = $request->sessions_count;
       $block_id = $request->block_id;
       $batch_number = $request->batch_number;
+      $date = $request->date;
 
       $block = Block::findOrFail($block_id);
 
@@ -40,7 +46,7 @@ class AbsenceController extends Controller
 
       /* Today Absence */
       $todayAttendance = AttendanceSheet::select('user_id', DB::raw('count(*) as total'))
-                        ->whereDate('created_at', Carbon::today())
+                        ->whereDate('created_at', $date)
                         ->where('block_id', '=', $block_id)
                         ->whereIn('user_id', $all_batch_stu)
                         ->groupBy('user_id')
@@ -59,14 +65,14 @@ class AbsenceController extends Controller
 
       foreach ($absentList as $key => $value) {
         $count = AttendanceSheet::select('user_id')
-                ->whereDate('created_at', Carbon::today())
+                ->whereDate('created_at', $date)
                 ->where('block_id', '=', $block_id)
                 ->where('user_id', '=', $value->id)
                 ->whereIn('user_id', $all_batch_stu)
                 ->count();
 
       $sessions = AttendanceSheet::select(DB::raw('TIME(created_at) as time'))
-              ->whereDate('created_at', Carbon::today())
+              ->whereDate('created_at', $date)
               ->where('block_id', '=', $block_id)
               ->where('user_id', '=', $value->id)
               ->whereIn('user_id', $all_batch_stu)
