@@ -15,7 +15,7 @@
       <form method="post" action="{{ route('absence.search') }}">
         @csrf
         <div class="form-group">
-          <label for="name">Block Name</label>
+          <label for="name">Block</label>
           <select class="form-control" name="block_id" required/>
           <option value="">Select a Block</option>
           @foreach ($blocks as $block)
@@ -37,6 +37,11 @@
         <div class="form-group">
           <label for="name">Total Number of Sessions</label>
           <input type="number" class="form-control" name="sessions_count" required/>
+        </div>
+
+        <div class="form-group">
+          <label for="name">Date</label>
+          <input type="date" class="form-control" name="date" required/>
         </div>
 
         <button type="submit" class="btn btn-primary">Today Absence</button>
