@@ -41,6 +41,10 @@ Route::get('/cas/logout', function(){
 });
 
 Route::group(['middleware'=> 'auth'],function(){
+
+// show all students of selected batch
+Route::get('dynamic/batch/{id}/block/{bid}', '\App\Http\Controllers\BlockController@dynamic_dependent');
+
 Route::group(['middleware' => ['role:admin']], function () {
 
 
@@ -72,9 +76,6 @@ Route::group(['middleware' => ['role:admin']], function () {
 
   Route::post('roles/addPermission','\App\Http\Controllers\RoleController@addPermission');
   Route::get('roles/removePermission/{permission}/{role_id}','\App\Http\Controllers\RoleController@revokePermission');
-
-  // show all students of selected batch
-  Route::get('dynamic/batch/{id}/block/{bid}', '\App\Http\Controllers\BlockController@dynamic_dependent');
 
   // clear block
   Route::get('block/clear/{id}', '\App\Http\Controllers\BlockController@block_clear')->name('block.clear');
