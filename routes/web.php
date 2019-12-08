@@ -41,10 +41,6 @@ Route::get('/cas/logout', function(){
 });
 
 Route::group(['middleware'=> 'auth'],function(){
-
-// show all students of selected batch
-Route::get('dynamic/batch/{id}/block/{bid}', '\App\Http\Controllers\BlockController@dynamic_dependent');
-
 Route::group(['middleware' => ['role:admin']], function () {
 
 
@@ -95,6 +91,8 @@ Route::post('problem', 'ProblemController@store')->name('problem.store');
 Route::delete('problems/{problem}', 'ProblemController@destroy')->name('problem.destroy');
 
 Route::resource('blocks', 'BlockController')->middleware('permission:blocks');
+// show all students of selected batch
+Route::get('dynamic/batch/{id}/block/{bid}', '\App\Http\Controllers\BlockController@dynamic_dependent')->middleware('permission:blocks');
 //Route::post('blocks', 'BlockController@store')->name('blocks.store')->middleware('permission:blocks');
 
 // Export
