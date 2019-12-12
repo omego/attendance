@@ -41,14 +41,16 @@ Route::get('/cas/logout', function(){
 });
 
 Route::group(['middleware'=> 'auth'],function(){
+
+//Users route for both admin and student affairs
+Route::resource('users','UserController');
+
 Route::group(['middleware' => ['role:admin']], function () {
 
-
-  //Users route
-  Route::resource('users','UserController');
-  // assign user to a group
+  /* assign user to a group -> duplicate routes
   Route::post('users/addUserGroup','UserController@addUserGroup');
   Route::get('users/removeUserGroup/{user_id}/{group_id}','\App\Http\Controllers\UserController@removeUserGroup');
+  */
 
   //Groups Routes
   Route::resource('group','GroupController');

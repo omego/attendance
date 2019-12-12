@@ -76,10 +76,12 @@
                                                     <a class="nav-link" href="{{ route('problem') }}">Problems</a>
                                                     </li>
                                                   @endcan
-                                          @role('admin')
+                                          @can('attendance sheet')
                                                 <li class="nav-item">
                                                 <a class="nav-link" href="{{ route('users.index') }}">Users</a>
                                                 </li>
+                                                @endcan
+                                                @role('admin')
                                                 <li class="nav-item">
                                                 <a class="nav-link" href="{{ route('roles.index') }}">Roles</a>
                                                 </li>

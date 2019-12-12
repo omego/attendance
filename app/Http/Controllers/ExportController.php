@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use PdfReport;
 use CSVReport;
 use Carbon\Carbon;
-
+use Auth;
 use App\Block;
 use App\User;
 use App\AttendanceSheet;
@@ -116,9 +116,18 @@ public function downloadExport(Request $request)
         'Sort By' => $sortBy
     ];
 
-      $queryBuilder = AttendanceSheet::select(['id', 'block_id', 'created_at', 'user_id']) // Do some querying..
-                          ->whereBetween('created_at', [$fromDate, $toDate])
+    $user = Auth::user();
+    $user_college = $user->college;
+    if ($user_college){
+      $user_college_id= $user_college->id;
+      if ($user->hasPermissionTo('attendance sheet')){
+      $queryBuilder = AttendanceSheet::select(['attendance_sheets.id', 'attendance_sheets.block_id', 'attendance_sheets.created_at', 'attendance_sheets.user_id']) // Do some querying..
+                          ->join('users', 'attendance_sheets.user_id', '=', 'users.id')
+                          ->where('users.college_id','=', $user_college_id)
+                          ->whereBetween('attendance_sheets.created_at', [$fromDate, $toDate])
                           ->orderBy($sortBy);
+      }
+    }
 
 
     $columns = [ // Set Column to be displayed
