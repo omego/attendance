@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Auth;
 //use App\Group;
 
-class GlobalScope implements Scope
+class BlockScope implements Scope
 {
     /**
      * Apply the scope to a given Eloquent query builder.
@@ -24,8 +24,12 @@ class GlobalScope implements Scope
          $user_college = $user->college;
          if ($user_college){
            $user_college_id= $user_college->id;
-           if ($user->hasRole('student affairs')){
-             $builder->where('college_id','=', $user_college_id);
+           if ($user->hasPermissionTo('attendance sheet')){
+             $fullTableName = $model->getTable(); // blocks table
+             $builder->join('block_user as b', $fullTableName.'.id', '=', 'b.block_id')
+                    ->join('users', 'b.user_id', '=', 'users.id')
+                    ->where('users.college_id','=', $user_college_id)
+                    ->select('blocks.id','blocks.block_title');
            }
            else {
              $builder;

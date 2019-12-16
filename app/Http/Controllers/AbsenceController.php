@@ -88,6 +88,7 @@ class AbsenceController extends Controller
         }
       }
 
-      return view('absence.index', compact('batch_number','sessions_count','block','absentList'));
+      $date = date('d-m-Y', strtotime($date));
+      return view('absence.index', compact('batch_number','sessions_count','block','absentList','date'));
     }
 }
