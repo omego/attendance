@@ -16,7 +16,7 @@
       </div><br />
       @endif
 
-      @role('admin')
+
       <!-- Assign Roles To Users -->
 
       <div class="form-group">
@@ -130,8 +130,6 @@
         @endforeach
       </div>
 
-      @endrole
-      
       <form action="{{ route('users.update', $user->id) }}" method = "post">
         @method('PATCH')
         @csrf

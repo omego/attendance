@@ -30,7 +30,7 @@
         </tr>
     </thead>
     <tbody>
-
+    
         @foreach($blocks as $block)
         <tr>
             <td>{{$block->id}}</td>
@@ -46,7 +46,7 @@
                   No User
               @endif
             </td>
-            <td>
+            <td>   
             @if(!empty($block->group->group_name))
            {{$block->group->group_name}}
            @else

@@ -41,16 +41,14 @@ Route::get('/cas/logout', function(){
 });
 
 Route::group(['middleware'=> 'auth'],function(){
-
-//Users route for both admin and student affairs
-Route::resource('users','UserController');
-
 Route::group(['middleware' => ['role:admin']], function () {
 
-  /* assign user to a group -> duplicate routes
+
+  //Users route
+  Route::resource('users','UserController');
+  // assign user to a group
   Route::post('users/addUserGroup','UserController@addUserGroup');
   Route::get('users/removeUserGroup/{user_id}/{group_id}','\App\Http\Controllers\UserController@removeUserGroup');
-  */
 
   //Groups Routes
   Route::resource('group','GroupController');
@@ -75,6 +73,9 @@ Route::group(['middleware' => ['role:admin']], function () {
   Route::post('roles/addPermission','\App\Http\Controllers\RoleController@addPermission');
   Route::get('roles/removePermission/{permission}/{role_id}','\App\Http\Controllers\RoleController@revokePermission');
 
+  // show all students of selected batch
+  Route::get('dynamic/batch/{id}/block/{bid}', '\App\Http\Controllers\BlockController@dynamic_dependent');
+
   // clear block
   Route::get('block/clear/{id}', '\App\Http\Controllers\BlockController@block_clear')->name('block.clear');
 
@@ -93,8 +94,6 @@ Route::post('problem', 'ProblemController@store')->name('problem.store');
 Route::delete('problems/{problem}', 'ProblemController@destroy')->name('problem.destroy');
 
 Route::resource('blocks', 'BlockController')->middleware('permission:blocks');
-// show all students of selected batch
-Route::get('dynamic/batch/{id}/block/{bid}', '\App\Http\Controllers\BlockController@dynamic_dependent')->middleware('permission:blocks');
 //Route::post('blocks', 'BlockController@store')->name('blocks.store')->middleware('permission:blocks');
 
 // Export
