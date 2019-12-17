@@ -6,6 +6,7 @@ use App\Http\Requests\BlockRequest;
 use App\Block;
 use App\User;
 use App\Group;
+use App\College;
 use DB;
 use App\UserBlock;
 use Auth;
