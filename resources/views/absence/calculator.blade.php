@@ -2,7 +2,7 @@
 @section('title', 'Absence Calculator')
 @section('content')
 
-<div class ="container">
+<div class="container">
 
   <button type="button" class="btn btn-link"></button>
 
@@ -16,35 +16,35 @@
         @csrf
         <div class="form-group">
           <label for="name">Block</label>
-          <select class="form-control" name="block_id" required/>
+          <select class="form-control" name="block_id" required />
           <option value="">Select a Block</option>
           @foreach ($blocks as $block)
           <option value="{{$block->id}}">{{$block->block_title}}</option>
           @endforeach
-        </select>
+          </select>
         </div>
 
         <div class="form-group">
           <label for="name">Batch</label>
-          <select class="form-control" name="batch_number" required/>
+          <select class="form-control" name="batch_number" required />
           <option value="">Select a Batch</option>
           @foreach ($batches as $batch)
           <option value="{{$batch->batch}}">{{$batch->batch}}</option>
           @endforeach
-        </select>
+          </select>
         </div>
 
         <div class="form-group">
           <label for="name">Total Number of Sessions</label>
-          <input type="number" class="form-control" name="sessions_count" required/>
+          <input type="number" class="form-control" name="sessions_count" required />
         </div>
 
         <div class="form-group">
           <label for="name">Date</label>
-          <input type="date" class="form-control" name="date" required/>
+          <input type="date" class="form-control" name="date" required />
         </div>
 
-        <button type="submit" class="btn btn-primary">Today Absence</button>
+        <button type="submit" class="btn btn-primary">Calculate</button>
       </form>
     </div>
 
