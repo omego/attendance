@@ -19,21 +19,25 @@ class GlobalScope implements Scope
      */
      public function apply(Builder $builder, Model $model)
      {
-       if (Auth::hasUser()) {
-         $user = Auth::user();
-         $user_college = $user->college;
-         if ($user_college){
-           $user_college_id= $user_college->id;
-           if ($user->hasRole('student affairs')){
-             $builder->where('college_id','=', $user_college_id);
-           }
-           else {
-             $builder;
-           }
-         }
-         else {
-           $builder;
-         }
-       }
+
+      if (app()->runningInConsole()) {
+        return;
+          }
+
+      if (Auth::hasUser())
+      {
+          if (Auth::user()->hasRole('admin')) {
+              $builder;
+          }
+          else 
+          {
+              $builder->where('college_id', Auth::user()->college_id);
+              
+          }
+      }
+      else
+      {
+        $builder;
+      }
      }
 }

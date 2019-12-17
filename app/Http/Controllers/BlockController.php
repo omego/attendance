@@ -55,6 +55,7 @@ class BlockController extends Controller
     $block = new block;
 
     $block->block_title = $request->block_title;
+    $block->college_id = Auth::user()->college_id;
 
     $block->save();
     return redirect('/blocks')->with('success', 'Block has been added');

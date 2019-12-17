@@ -27,6 +27,6 @@ class Block extends Model
     {
       parent::boot();
 
-      static::addGlobalScope(new Scopes\BlockScope);
+      static::addGlobalScope(new Scopes\GlobalScope);
     }
 }
