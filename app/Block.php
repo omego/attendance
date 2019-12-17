@@ -12,11 +12,6 @@ class Block extends Model
     {
         return $this->belongsTo('App\Group');
     }
-
-    public function college()
-    {
-        return $this->belongsTo('App\College');
-    }
     
     public function user()
     {
