@@ -32,6 +32,7 @@
     </thead>
     <tbody>
         @foreach($problems as $problem)
+        @if(!empty($problem->user->name))
         <tr>
             {{-- <td>{{$problem->id}}</td> --}}
             <td>{{$problem->user->name}}</td>
@@ -47,6 +48,7 @@
                 </form>
             </td>
         </tr>
+        @endif
         @endforeach
     </tbody>
     <tfoot>
