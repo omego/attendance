@@ -12,9 +12,21 @@ class Block extends Model
     {
         return $this->belongsTo('App\Group');
     }
-    
+
+    public function college()
+    {
+        return $this->belongsTo('App\College');
+    }
+
     public function user()
     {
-        return $this->belongsToMany('App\User','block_user', 'block_id','user_id');
+        return $this->belongsToMany('App\User', 'block_user', 'block_id', 'user_id');
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new Scopes\GlobalScope);
     }
 }

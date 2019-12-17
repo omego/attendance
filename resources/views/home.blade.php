@@ -154,7 +154,7 @@ var GOOGLE_API = '{!! env("GOOGLE_MAPS_STATIC_API") !!}';
                 Attend a Session
               </button>
             </p>
-            <span class="badge badge-warning"> Attendance available for 15  minutes </span>
+            <span class="badge badge-secondary"> Attendance available for 15  minutes every hour </span>
             <p>
               <div id="mapholder"></div>
             </p>

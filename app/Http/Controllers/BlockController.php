@@ -6,6 +6,7 @@ use App\Http\Requests\BlockRequest;
 use App\Block;
 use App\User;
 use App\Group;
+use App\College;
 use DB;
 use App\UserBlock;
 use Auth;
@@ -54,6 +55,7 @@ class BlockController extends Controller
     $block = new block;
 
     $block->block_title = $request->block_title;
+    $block->college_id = Auth::user()->college_id;
 
     $block->save();
     return redirect('/blocks')->with('success', 'Block has been added');
