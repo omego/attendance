@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Problem;
 use Illuminate\Http\Request;
+use App\College;
 use Auth;
 
 class ProblemController extends Controller
@@ -27,7 +28,8 @@ class ProblemController extends Controller
     public function create()
     {
       $user_id = Auth::user();
-        return view('problem.create', compact('user_id'));
+      $college_id =Auth::user()->college_id;
+        return view('problem.create', compact('user_id','college_id'));
     }
 
     /**
@@ -45,6 +47,7 @@ class ProblemController extends Controller
       $problem->problem_title = $request->problem_title;
       $problem->problem_content = $request->problem_content;
       $problem->user_id = Auth::user()->id;
+      $problem->college_id = Auth::user()->college_id;
       $problem->save();
       return redirect('home')->with('success', 'Problem has been sent');
     }

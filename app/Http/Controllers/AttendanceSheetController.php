@@ -6,6 +6,7 @@ use App\Http\Requests\AttendanceSheetRequest;
 use App\AttendanceSheet;
 use App\Block;
 use Carbon\Carbon;
+use App\College;
 use Auth;
 
 class AttendanceSheetController extends Controller

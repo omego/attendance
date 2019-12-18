@@ -215,6 +215,7 @@ var GOOGLE_API = '{!! env("GOOGLE_MAPS_STATIC_API") !!}';
               @endif
             </select>
             <input type="text" class="form-control" name="user_id" value="{{$user->id}}" hidden />
+            <input type="text" class="form-control" name="college_id" value="{{$user->college_id}}" hidden />
             <div id="coords"></div>
           </div>
         </div>
