@@ -45,6 +45,7 @@ class ProblemController extends Controller
       $problem->problem_title = $request->problem_title;
       $problem->problem_content = $request->problem_content;
       $problem->user_id = Auth::user()->id;
+      $problem->college_id = Auth::user()->college_id;
       $problem->save();
       return redirect('home')->with('success', 'Problem has been sent');
     }

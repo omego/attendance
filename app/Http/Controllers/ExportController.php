@@ -116,18 +116,26 @@ public function downloadExport(Request $request)
         'Sort By' => $sortBy
     ];
 
-    $user = Auth::user();
-    $user_college = $user->college;
-    if ($user_college){
-      $user_college_id= $user_college->id;
-      if ($user->hasPermissionTo('attendance sheet')){
-      $queryBuilder = AttendanceSheet::select(['attendance_sheets.id', 'attendance_sheets.block_id', 'attendance_sheets.created_at', 'attendance_sheets.user_id']) // Do some querying..
+    //$user = Auth::user();
+    // $user_college = $user->college;
+    // if ($user_college){
+    //   $user_college_id= $user_college->id;
+      if (Auth::user()->hasPermissionTo('attendance sheet')){
+
+        $queryBuilder = AttendanceSheet::select('id','user_id','block_id','created_at')
+                        ->where('college_id',Auth::user()->college_id)
+                        ->whereBetween('created_at', [$fromDate, $toDate])
+                        ->orderBy($sortBy);
+                       
+          
+          //this is tooo complacated due to join :( 
+      /*$queryBuilder = AttendanceSheet::select(['attendance_sheets.id', 'attendance_sheets.block_id', 'attendance_sheets.created_at', 'attendance_sheets.user_id']) // Do some querying..
                           ->join('users', 'attendance_sheets.user_id', '=', 'users.id')
                           ->where('users.college_id','=', $user_college_id)
                           ->whereBetween('attendance_sheets.created_at', [$fromDate, $toDate])
-                          ->orderBy($sortBy);
+                          ->orderBy($sortBy);*/
       }
-    }
+    //}
 
 
     $columns = [ // Set Column to be displayed
