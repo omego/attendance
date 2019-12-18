@@ -8,16 +8,14 @@
 
   <div class="card uper">
     <div class="card-header">
-      Absence Sheet
+      Today Absence
     </div>
     <div class="card-body">
     <div class="row">
       <div class="col-md-12">
       <h3><span class="badge badge-secondary"> Block Title: {{$block->block_title}}</span>
       <span class="badge badge-secondary"> Batch Number: {{$batch_number}}</span>
-      <span class="badge badge-secondary"> Total Sessions: {{$sessions_count}}</span>
-      <span class="badge badge-secondary"> Date: {{$date}}</span>
-    </h3>
+      <span class="badge badge-secondary"> Total Sessions: {{$sessions_count}}</span></h3>
       </div>
     </div>
   </div>

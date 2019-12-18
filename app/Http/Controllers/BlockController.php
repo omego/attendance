@@ -24,21 +24,22 @@ class BlockController extends Controller
     ->groupBy('blocks.id')
     ->get();
     */
-    
-    
+
+
     //$group = Group::all();
     //$user = Auth::user();
     $blocks = Block::all();
-    
+
+
     // return response()->json($blocks);
     return view('blocks.index', compact('blocks'));
   }
 
   /**
-  * Show the form for creating a new resource.
-  *
-  * @return \Illuminate\Http\Response
-  */
+   * Show the form for creating a new resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
   public function create()
   {
     //
@@ -50,7 +51,7 @@ class BlockController extends Controller
     // $block = Block::create($request->all());
 
     $request->validate([
-      'block_title'=>'required',
+      'block_title' => 'required',
     ]);
     $block = new block;
 
@@ -79,32 +80,29 @@ class BlockController extends Controller
 
     $students = $request->assignStuToBlock; // array of Students to be assigned to the block
 
-    if ($students){ // if at least one students selected (checked)
+    if ($students) { // if at least one students selected (checked)
       // delete all old assignment
       UserBlock::where('block_id', $id)->delete();
       $result = false;
       foreach ($students as $student) {
-        $data = array('user_id' =>$student , 'block_id' => $id, 'created_at' => \Carbon\Carbon::now());
+        $data = array('user_id' => $student, 'block_id' => $id, 'created_at' => \Carbon\Carbon::now());
         $result = UserBlock::insert($data);
       }
 
-      if ($result)
-      {
+      if ($result) {
         return redirect('/blocks')->with('success', 'Block has been updated');
       }
-    }
-    else { // if no students selected
+    } else { // if no students selected
       return redirect('/blocks');
     }
-
   }
 
   /**
-  * Show the form for editing the specified resource.
-  *
-  * @param  \App\Block  $block
-  * @return \Illuminate\Http\Response
-  */
+   * Show the form for editing the specified resource.
+   *
+   * @param  \App\Block  $block
+   * @return \Illuminate\Http\Response
+   */
   public function edit($id)
   {
     //
@@ -112,59 +110,55 @@ class BlockController extends Controller
 
     $batches = User::whereNotNull('batch')->select('batch')->distinct()->get();
 
-    return view('blocks.edit', compact('block','batches'));
+    return view('blocks.edit', compact('block', 'batches'));
   }
 
-  public function dynamic_dependent($id,$bid)
+  public function dynamic_dependent($id, $bid)
   {
 
     // All students in selected batch
-    $stuList = User::where('batch','=',$id)->get();
+    $stuList = User::where('batch', '=', $id)->get();
 
-    $assigned_stu = UserBlock::where('block_id','=',$bid)->get();
+    $assigned_stu = UserBlock::where('block_id', '=', $bid)->get();
 
     // if the block has students already assigned to it
-    if ($assigned_stu){
+    if ($assigned_stu) {
 
       $assigned_list = DB::table("block_user")
-      ->where("block_id",$bid)
-      ->join('users', 'users.id', '=', 'block_user.user_id')
-      ->select('users.id')->get();
+        ->where("block_id", $bid)
+        ->join('users', 'users.id', '=', 'block_user.user_id')
+        ->select('users.id')->get();
 
-      foreach($stuList as $k => $obj) {
+      foreach ($stuList as $k => $obj) {
         $obj->{'assigned'} = 0;
       }
 
       $assigned_list = json_decode($assigned_list, true);
 
       // compare assigned students to all students
-      foreach ($stuList as $key1=>$value1) {
-        foreach ($assigned_list as $key2=>$value2) {
-          if ($value1['id']== $value2['id']) {
-            $value1['assigned']=1;
+      foreach ($stuList as $key1 => $value1) {
+        foreach ($assigned_list as $key2 => $value2) {
+          if ($value1['id'] == $value2['id']) {
+            $value1['assigned'] = 1;
           }
         }
       }
 
       return $stuList;
-    }
-    else{
+    } else {
       return $stuList;
     }
-
   }
 
-  public function block_clear ($id){
+  public function block_clear($id)
+  {
 
     $result = UserBlock::where('block_id', $id)->delete();
-    if ($result){
+    if ($result) {
       return redirect('/blocks')->with('success', 'Block has been cleared');
-    }
-    else {
+    } else {
       return redirect('/blocks')->with('warning', 'Something wrong happened, please try again');
     }
-
-
   }
 
   public function destroy($id)

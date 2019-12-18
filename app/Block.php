@@ -20,13 +20,13 @@ class Block extends Model
 
     public function user()
     {
-        return $this->belongsToMany('App\User','block_user', 'block_id','user_id');
+        return $this->belongsToMany('App\User', 'block_user', 'block_id', 'user_id');
     }
 
     public static function boot()
     {
-      parent::boot();
+        parent::boot();
 
-      static::addGlobalScope(new Scopes\GlobalScope);
+        static::addGlobalScope(new Scopes\GlobalScope);
     }
 }

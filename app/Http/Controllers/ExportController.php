@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use PdfReport;
 use CSVReport;
 use Carbon\Carbon;
-use Auth;
+
 use App\Block;
 use App\User;
 use App\AttendanceSheet;

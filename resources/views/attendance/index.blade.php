@@ -35,7 +35,6 @@
     <tbody>
 
   @foreach($attendancesheets as $attendancesheet)
-  @if(!empty($attendancesheet->user->name))
     <tr>
       <td>{{$attendancesheet->user->name}}</td>
 
@@ -64,7 +63,6 @@
     </td> --}}
 
   </tr>
-  @endif
     @endforeach
 
   </tbody>
