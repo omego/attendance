@@ -73,15 +73,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('roles/addPermission', '\App\Http\Controllers\RoleController@addPermission');
     Route::get('roles/removePermission/{permission}/{role_id}', '\App\Http\Controllers\RoleController@revokePermission');
 
-    // show all students of selected batch
-    Route::get('dynamic/batch/{id}/block/{bid}', '\App\Http\Controllers\BlockController@dynamic_dependent');
+    // // show all students of selected batch
+    // Route::get('dynamic/batch/{id}/block/{bid}', '\App\Http\Controllers\BlockController@dynamic_dependent');
 
-    // clear block
-    Route::get('block/clear/{id}', '\App\Http\Controllers\BlockController@block_clear')->name('block.clear');
+    // // clear block
+    // Route::get('block/clear/{id}', '\App\Http\Controllers\BlockController@block_clear')->name('block.clear');
   });
   // clear block for student affairs
   Route::get('block/clear/{id}', '\App\Http\Controllers\BlockController@block_clear')->name('block.clear')->middleware('permission:blocks');
-
+  // show all students of selected batch
+  Route::get('dynamic/batch/{id}/block/{bid}', '\App\Http\Controllers\BlockController@dynamic_dependent')->middleware('permission:blocks');
   Route::get('checkAttendanceTime', '\App\Http\Controllers\HomeController@checkAttendanceTime');
 
   Route::get('/attendance', 'AttendanceSheetController@index')->name('attendance')->middleware('permission:attendance sheet');
