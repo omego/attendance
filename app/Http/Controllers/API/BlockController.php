@@ -7,6 +7,8 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Block;
+use App\UserBlock;
+use App\User;
 use Validator;
 
 
@@ -22,7 +24,8 @@ class BlockController extends BaseController
         $blocks = Block::all();
         // return response()->json($blocks);
 
-        return $this->sendResponse($blocks->toArray(), 'Products retrieved successfully.');
+        // return $this->sendResponse($blocks->toArray(), 'Products retrieved successfully.');
+        return response()->json($blocks);
     }
 
     public function create(Request $request)
@@ -132,4 +135,18 @@ class BlockController extends BaseController
 
         return $this->sendResponse($product->toArray(), 'Product deleted successfully.');
     }
+
+    public function userBlockName(Request $request)
+    {
+        $getUserId = User::where('email', $request->userEmail)->first(); //get the user id by his email from the request
+        $userBlockId = UserBlock::where('user_id', $getUserId->id)->value('block_id');
+        // $userBlockName = Block::where('id', $userBlockId)->value('block_title');
+        $userBlock = $getUserId->blocks()->first();
+        // dump($userBlock->block_title);
+        // echo($getUserId->blocks()->first());
+        // echo($userBlock);
+        // return $this->sendResponse($userBlockName->toArray(), 'block created successfully.');
+        return response()->json($userBlock);
+    }
+
 }

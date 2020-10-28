@@ -64,17 +64,28 @@ class AttendanceSheetController extends BaseController
         // }
         $attendancesheets = new AttendanceSheet;
         
-        $userEmail = User::select('id')->where('email', $request->user_email)->first();
-        $attendancesheets->user_id = $userEmail->id;
-        $attendancesheets->block_id = $request->block_id;
-        $attendancesheets->coords = $request->coords;
-        $attendancesheets->beacon = $request->beacon;
+        // $userEmail = User::select('id')->where('email', $request->user_email)->first();
+        // $attendancesheets->user_id = $userEmail->id;
+        // $attendancesheets->block_id = $request->block_id;
+        // $attendancesheets->coords = $request->coords;
+        // $attendancesheets->beacon = $request->beacon;
+
+        $user = User::select('id')->where('email', $request->user_email)->first();
+        $attendancesheets->user_id = $user->id;
+        $userBlockId = $user->blocks()->first();
+        $attendancesheets->block_id = $userBlockId->id;
+        // $attendancesheets->coords = $request->coords;
+        $attendancesheets->beacon = $request->beacon_name;
 
         // $attendanceSheet = AttendanceSheet::create($input);
         
         $attendancesheets->save();
 
-        return $this->sendResponse($attendancesheets->toArray(), 'attendance created successfully.');
+        // return $this->sendResponse($attendancesheets->toArray(), 'attendance created successfully.');
+
+        return response()->json([
+            "message" => "Attendance taken successfully"
+        ], 201);
     }
 
 
@@ -152,7 +163,7 @@ class AttendanceSheetController extends BaseController
         $fromDate = Carbon::parse(Carbon::now()->toFormattedDateString())->startOfDay();
         $toDate = Carbon::parse(Carbon::now()->toFormattedDateString())->endOfDay();
         $UserLastAttendance = AttendanceSheet::where('user_id', '=', $user->id)
-        ->whereBetween('created_at', [$fromDate, $toDate])
+        // ->whereBetween('created_at', [$fromDate, $toDate])
         ->get();
 
         // $attendancesheets = AttendanceSheet::find($id);
@@ -163,6 +174,30 @@ class AttendanceSheetController extends BaseController
         // }
 
         // return response()->json($UserLastAttendance);
-        return $this->sendResponse($UserLastAttendance->toArray(), 'Product retrieved successfully.');
+        // return $this->sendResponse($UserLastAttendance->toArray(), 'Product retrieved successfully.');
+        return response()->json($UserLastAttendance);
+    }
+    public function StudentAttendance($email_id)
+    {
+
+        $user = User::select('id')->where('email', $email_id)->first();
+        $UserLastAttendance = AttendanceSheet::where('user_id', '=', $user->id)->latest()
+        // ->whereBetween('created_at', [$fromDate, $toDate])
+        ->get();
+
+        // $attendancesheets = AttendanceSheet::find($id);
+
+
+        // if (is_null($block)) {
+        //     return $this->sendError('Product not found.');
+        // }
+
+        // return response()->json($UserLastAttendance);
+        // return $this->sendResponse($UserLastAttendance->toArray(), 'Product retrieved successfully.');
+        if ($UserLastAttendance->isEmpty()) {
+            return response(null, 204);
+        }
+        
+        return response()->json($UserLastAttendance);
     }
 }
