@@ -35,6 +35,15 @@ host('production')
     ->set('deploy_path', '/var/www/attendance')
 ;
 
+host('staging')
+    ->hostname('68.183.60.58')
+    ->stage('staging')
+    ->set('branch', 'dev')
+    ->user('deployer')
+    ->identityFile('~/.ssh/deployerkey')
+    ->set('deploy_path', '/var/www/attend')
+;
+
 // Tasks
 
 task('build', function () {
