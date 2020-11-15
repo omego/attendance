@@ -13,9 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 // Route::resource('blocks', 'BlockController');
 // Route::resource('attendancesheets', 'AttendanceSheetController');
 // Route::apiResource('blocks', 'API\BlockController');
