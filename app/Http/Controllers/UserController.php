@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Illuminate\Validation\Rule;
 // use App\Group;
 use App\Mail\agent;
 
@@ -35,6 +36,7 @@ class UserController extends Controller
     public function create()
     {
         //
+        return view('users.create');
         // return view('status.create');
 
     }
@@ -47,11 +49,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // $status = new Status;
-        // $status->status_name = $request->status_name;
-        // $status->save();
-        // return redirect('/status')->with('success', 'status has been added');
+        $this->validate($request, [
+            'email' => 'unique:users,email|required|max:191|string|email',
+            'name' => 'required|max:191|string',
+            'password' => 'required|between:6,50|string',
+            ]);
+     
+           $user = new \App\User();
+     
+           $user->email = $request->email;
+           $user->name = $request->name;
+           $user->password = Hash::make($request->password);
+     
+           $user->save();
+              return redirect('/users')->with('success', 'User has been created');
 
     }
 
