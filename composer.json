@@ -16,7 +16,7 @@
         "laravel/framework": "5.7.*",
         "laravel/passport": "^7.0",
         "laravel/tinker": "^1.0",
-        "league/csv": "^9.0",
+        "league/csv": "9.4.1",
         "pragmarx/version": "^0.2.8",
         "spatie/flysystem-dropbox": "^1.0",
         "spatie/laravel-backup": "^6.0",
