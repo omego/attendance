@@ -146,7 +146,12 @@ class BlockController extends BaseController
         // echo($getUserId->blocks()->first());
         // echo($userBlock);
         // return $this->sendResponse($userBlockName->toArray(), 'block created successfully.');
-        return response()->json($userBlock);
+        if (is_null($userBlock)) {
+            return response(null, 204);
+        }elseif ($userBlock){
+            return response()->json($userBlock);
+        }
+        
     }
 
 }
