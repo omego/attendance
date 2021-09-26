@@ -181,9 +181,8 @@ class AttendanceSheetController extends BaseController
     {
 
         $user = User::select('id')->where('email', $email_id)->first();
-        $UserLastAttendance = AttendanceSheet::where('user_id', '=', $user->id)->latest()
-        // ->whereBetween('created_at', [$fromDate, $toDate])
-        ->get();
+        // $UserLastAttendance = AttendanceSheet::where('user_id', '=', $user->id)->latest()
+        $UserLastAttendance = AttendanceSheet::with('block')->where('user_id', '=', $user->id)->latest()->get();
 
         // $attendancesheets = AttendanceSheet::find($id);
 
