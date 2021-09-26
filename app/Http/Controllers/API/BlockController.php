@@ -10,6 +10,7 @@ use App\Block;
 use App\UserBlock;
 use App\User;
 use Validator;
+use Illuminate\Support\Facades\Hash;
 
 
 class BlockController extends BaseController
@@ -139,6 +140,13 @@ class BlockController extends BaseController
     public function userBlockName(Request $request)
     {
         $getUserId = User::where('email', $request->userEmail)->first(); //get the user id by his email from the request
+        if(!$getUserId){
+          $getUserId = new User;
+          $getUserId->name = $request->userEmail;
+          $getUserId->email = $request->userEmail;
+          $getUserId->password= Hash::make('the11-passw^@ord-of-choicexx');
+          $getUserId->save();
+        }
         if ($getUserId){
             $userBlockId = UserBlock::where('user_id', $getUserId->id)->value('block_id');
             $userBlock = $getUserId->blocks()->first();
