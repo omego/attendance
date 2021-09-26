@@ -139,18 +139,37 @@ class BlockController extends BaseController
     public function userBlockName(Request $request)
     {
         $getUserId = User::where('email', $request->userEmail)->first(); //get the user id by his email from the request
-        $userBlockId = UserBlock::where('user_id', $getUserId->id)->value('block_id');
-        // $userBlockName = Block::where('id', $userBlockId)->value('block_title');
-        $userBlock = $getUserId->blocks()->first();
+        if ($getUserId){
+            $userBlockId = UserBlock::where('user_id', $getUserId->id)->value('block_id');
+            $userBlock = $getUserId->blocks()->first();
+            if (is_null($userBlock)) {
+                return response(null, 204);
+            }
+            elseif ($userBlock){
+                return response()->json($userBlock);
+            }
+        }else{
+            return response(null, 404);
+        }
+        // $userBlockId = UserBlock::where('user_id', $getUserId->id)->value('block_id');
+        // // $userBlockName = Block::where('id', $userBlockId)->value('block_title');
+        // $userBlock = $getUserId->blocks()->first();
         // dump($userBlock->block_title);
         // echo($getUserId->blocks()->first());
         // echo($userBlock);
         // return $this->sendResponse($userBlockName->toArray(), 'block created successfully.');
-        if (is_null($userBlock)) {
-            return response(null, 204);
-        }elseif ($userBlock){
-            return response()->json($userBlock);
-        }
+        // if (is_null($userBlock)) {
+        //     return response(null, 204);
+        // }
+        // elseif (isset($userBlock)){
+        //     return response(null, 404);
+        // }
+        // elseif ($userBlock){
+        //     return response()->json($userBlock);
+        // }
+        // elseif (!$userBlock){
+        //     return response()->json($userBlock);
+        // }
         
     }
 
